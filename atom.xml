@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[Здесь по-прежнему ничего не написано]]></title>
   <link href="http://maximkoo.github.io/OctopressREPO/atom.xml" rel="self"/>
   <link href="http://maximkoo.github.io/OctopressREPO/"/>
-  <updated>2015-04-28T11:41:25+03:00</updated>
+  <updated>2015-04-28T11:46:49+03:00</updated>
   <id>http://maximkoo.github.io/OctopressREPO/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[maximkoo]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
