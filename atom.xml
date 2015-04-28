@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Здесь по-прежнему ничего не написано]]></title>
-  <link href="http://maximkoo.github.io/OctopressREP1/atom.xml" rel="self"/>
-  <link href="http://maximkoo.github.io/OctopressREP1/"/>
-  <updated>2015-04-28T13:32:38+03:00</updated>
-  <id>http://maximkoo.github.io/OctopressREP1/</id>
+  <link href="http://maximkoo.github.io/OctopressREPO/atom.xml" rel="self"/>
+  <link href="http://maximkoo.github.io/OctopressREPO/"/>
+  <updated>2015-04-28T13:35:10+03:00</updated>
+  <id>http://maximkoo.github.io/OctopressREPO/</id>
   <author>
     <name><![CDATA[maximkoo]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Пост номер 1]]></title>
-    <link href="http://maximkoo.github.io/OctopressREP1/blog/2015/04/28/post-nomier-1/"/>
+    <link href="http://maximkoo.github.io/OctopressREPO/blog/2015/04/28/post-nomier-1/"/>
     <updated>2015-04-28T10:48:29+03:00</updated>
-    <id>http://maximkoo.github.io/OctopressREP1/blog/2015/04/28/post-nomier-1</id>
+    <id>http://maximkoo.github.io/OctopressREPO/blog/2015/04/28/post-nomier-1</id>
     <content type="html"><![CDATA[<h1>Мощный первый пост</h1>
 
 <p>Я очень долго со всем этим разбирался, и теперь <strong>проверим</strong>, как всё это <em>работает</em></p>
