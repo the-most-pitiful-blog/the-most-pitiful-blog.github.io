@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Как мы ездили в Воронеж"
-date: 2015-06-15 13:24:58 +0300
+date: 2015-06-12 23:59:59 +0300
 comments: true
 categories: 
 published: true
