@@ -4,7 +4,7 @@
   <title><![CDATA[Здесь по-прежнему ничего не написано]]></title>
   <link href="http://maximkoo.github.io/atom.xml" rel="self"/>
   <link href="http://maximkoo.github.io/"/>
-  <updated>2015-06-24T10:09:09+03:00</updated>
+  <updated>2015-06-24T14:33:20+03:00</updated>
   <id>http://maximkoo.github.io/</id>
   <author>
     <name><![CDATA[maximkoo]]></name>
@@ -12,6 +12,171 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Как я перенёс фотоархив с работы домой]]></title>
+    <link href="http://maximkoo.github.io/blog/2015/06/23/kak-ia-pierienios-fotoarkhiv-s-raboty-domoi/"/>
+    <updated>2015-06-23T16:19:10+03:00</updated>
+    <id>http://maximkoo.github.io/blog/2015/06/23/kak-ia-pierienios-fotoarkhiv-s-raboty-domoi</id>
+    <content type="html"><![CDATA[<p>В общем, проблема переноса фотоархива с работы домой так окончательного решения и не находила. GoodSync отказался работать после истечения триального периода, я только зря потратил время на изучение.</p>
+
+<p>С некоторым усилием я развернул дома FTP-cервер, примечательно, что я использовал сервер, встроенный в Windows 7. С нетбука под Убунту на работе через офисный wifi я смог приконнектиться и даже скопировать файлик командой cp. Но мне надо было копировать много файлов и папок. Из рассмотренных программ:</p>
+
+<ul>
+<li>gFTP работает нормально, но спотыкается об уже существующие файлы и папки</li>
+<li>Double Commander неправильно отображает имена папок на удалённой стороне,и самое главное, после потери соединения не может переподключиться и его приходится перезапускать, а запускается он только из командной строки, в меню он не добавился.</li>
+<li>Midnight Commander вообще не работает, или я чего-то не понял. На вид полное убожество, разбираться желания не возникло.</li>
+</ul>
+
+
+<p>В общем, я прикинул так и этак, и сам написал программку для копировния на Ruby. Собственно, это первый осмысленный код, что я написал на Руби. Программка умеет копировать файлы по FTP, перебирая вложенные папки и копируя их структуру. Уже существующие файлы и папки пропускаются (достаточно совпадения имени).</p>
+
+<p>в файле <strong>copy_ftp_f.rb</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;net/ftp&#39;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">FTPConn</span> <span class="o">&lt;</span> <span class="no">Net</span><span class="o">::</span><span class="no">FTP</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>      <span class="vi">@ftpc</span><span class="o">=</span><span class="no">Net</span><span class="o">::</span><span class="no">FTP</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;xxx.xxx.xxx.xxx&#39;</span><span class="p">)</span> <span class="c1">#IP-адрес</span>
+</span><span class='line'>      <span class="vi">@ftpc</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">ftpConn</span>
+</span><span class='line'>      <span class="vi">@ftpc</span>
+</span><span class='line'>  <span class="k">end</span>  
+</span><span class='line'>  <span class="k">def</span> <span class="nf">closeFtpConn</span>
+</span><span class='line'>      <span class="vi">@ftpc</span><span class="o">.</span><span class="n">close</span>
+</span><span class='line'>  <span class="k">end</span>  
+</span><span class='line'><span class="k">end</span>    
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">CopyFTP</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">pftp</span><span class="p">,</span> <span class="n">pfrom</span><span class="p">,</span> <span class="n">pto</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@s1</span><span class="p">,</span><span class="vi">@s2</span><span class="o">=</span><span class="n">pfrom</span><span class="p">,</span><span class="n">pto</span>
+</span><span class='line'>      <span class="c1">#puts &#39;@s1=&#39;+@s1</span>
+</span><span class='line'>      <span class="c1">#puts &#39;@s2=&#39;+@s2</span>
+</span><span class='line'>      <span class="c1">#puts &#39;@s2(Basename)=&#39;+File.basename(@s2)</span>
+</span><span class='line'>      <span class="vi">@ftp</span><span class="o">=</span><span class="n">pftp</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">copyFolder</span>
+</span><span class='line'>      <span class="c1">#puts @ftp.nlst()</span>
+</span><span class='line'>      <span class="vi">@fi</span><span class="o">=</span><span class="vi">@ftp</span><span class="o">.</span><span class="n">nlst</span><span class="p">()</span>
+</span><span class='line'>      <span class="k">if</span> <span class="vi">@fi</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="s1">&#39;FTP: trying to enter directory &#39;</span><span class="o">+</span><span class="vi">@s2</span>
+</span><span class='line'>          <span class="n">fff</span><span class="o">=</span><span class="vi">@ftp</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="s1">&#39;Directory &#39;</span><span class="o">+</span><span class="vi">@s2</span><span class="o">+</span> <span class="s1">&#39; exists.&#39;</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>          <span class="vi">@ftp</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="s1">&#39;Directory &#39;</span><span class="o">+</span><span class="vi">@s2</span><span class="o">+</span> <span class="s1">&#39; created.&#39;</span>
+</span><span class='line'>          <span class="vi">@ftp</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
+</span><span class='line'>      <span class="k">end</span>  
+</span><span class='line'>      
+</span><span class='line'>      <span class="vi">@fi</span><span class="o">=</span><span class="vi">@ftp</span><span class="o">.</span><span class="n">nlst</span><span class="p">()</span>
+</span><span class='line'>      <span class="c1">#puts @fi</span>
+</span><span class='line'>      <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="vi">@s1</span><span class="o">+</span><span class="s1">&#39;/*&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
+</span><span class='line'>          <span class="k">if</span> <span class="no">File</span><span class="o">.</span><span class="n">file?</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span class='line'>              <span class="nb">print</span> <span class="s1">&#39;Copy file &#39;</span><span class="o">+</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;...&#39;</span>
+</span><span class='line'>              <span class="k">if</span> <span class="ow">not</span> <span class="vi">@fi</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span><span class='line'>                  <span class="vi">@ftp</span><span class="o">.</span><span class="n">putbinaryfile</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span class='line'>                  <span class="nb">puts</span> <span class="s1">&#39;copied&#39;</span>
+</span><span class='line'>              <span class="k">else</span>
+</span><span class='line'>                  <span class="nb">puts</span> <span class="s1">&#39;already exists!&#39;</span>
+</span><span class='line'>              <span class="k">end</span>
+</span><span class='line'>          <span class="k">else</span>
+</span><span class='line'>              <span class="nb">puts</span> <span class="s1">&#39;Entering directory &#39;</span><span class="o">+</span><span class="n">x</span>
+</span><span class='line'>              <span class="n">z</span><span class="o">=</span><span class="no">CopyFTP</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@ftp</span><span class="p">,</span> <span class="vi">@s1</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="vi">@s2</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span><span class='line'>              <span class="n">z</span><span class="o">.</span><span class="n">copyFolder</span>
+</span><span class='line'>          <span class="k">end</span>  
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="vi">@ftp</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>  
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>в файле <strong>copy_home.rb</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;./copy_ftp_f.rb&#39;</span>
+</span><span class='line'><span class="n">f</span><span class="o">=</span><span class="no">FTPConn</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">fc</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">ftpConn</span>
+</span><span class='line'><span class="nb">p</span><span class="o">=</span><span class="no">CopyFTP</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span><span class="no">ARGV</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'><span class="nb">p</span><span class="o">.</span><span class="n">copyFolder</span>
+</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">closeFtpConn</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Для запуска из командной строки</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">copy_home</span><span class="o">.</span><span class="n">rb</span> <span class="sr">/home/m</span><span class="n">aximko</span><span class="o">/</span><span class="n">from_folder</span> <span class="n">to_folder</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Работает нормально.</p>
+
+<p>Как я начинаю понимать, если под Линуксом хочешь пользоваться нормальным софтом - пиши его сам! Тут вам не винда, где всё работает с самого начала, тут вам свобода, то есть ничего готового нет.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Как я провёл двадцать третье июня]]></title>
@@ -393,33 +558,6 @@
 <p>После работы поехали с Юлей в ОБИ, потому что Лена Куркина говорила, что там распродажа смородины по 100 рублей. Действительно, смородина по 100 рублей, кустики, правда, хотя и крупные, но довольно ободранные, корни просто в пакете. Всё остальное дорого, саженцы черешни на вид трёхлетние по тысяче. Ещё прикупили удобрений.</p>
 
 <p>Неприятная новость: в школе сказали, что Поля попала в класс 1Г, к какой-то Амалии Эдуардовне, которая раньше в этой школе не работала. А преподаватель Башлыкова Т.Ш, к который мы хотели попасть, будет вести второй класс. Юля навела справки у Лены с Воротынской, Лена сказала, что эта Амалия Эдуардовна раньше вела продлёнку в 2005-й школе и её оттуда почему-то выперли. Так что надо пытаться перевести Полю в другой класс или ещё есть идея отдать Полю в гимназию &ldquo;Белоснежка&rdquo; в таунхаусах. Стоит 45 тысяч в месяц, но зато полный день, таким образом, можно сэкономить на няне.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Как я провёл первое июня]]></title>
-    <link href="http://maximkoo.github.io/blog/2015/06/02/kak-ia-proviol-piervoie-iiunia/"/>
-    <updated>2015-06-02T10:20:07+03:00</updated>
-    <id>http://maximkoo.github.io/blog/2015/06/02/kak-ia-proviol-piervoie-iiunia</id>
-    <content type="html"><![CDATA[<p>В первый день лета в зале пожал 100х8, 5, 5. Ещё разок так пожать, и можно считать, что результаты закреплены.</p>
-
-<p>Утром приезал Виктор Иванович. После работы Юля предложила поехать на участок, я был очень уставший ещё со вчерашнего дня, но, тщательно всё обдумав, согласился. Выехали в начале восьмого, доехали хорошо. С собой взяли бутыль воды для полива и кое-какие удобрения.</p>
-
-<p>На участке все высохло, то есть можно сделать вывод, что для просушки участка нужно примерно двое с половиной суток. По участку ходили три кота, мы им дали баночку корма из &ldquo;Ашана&rdquo;. Саженцы розы прижились, декоративный виноград предварительно тоже прижился. Я сколотил пару рамок. Для небольших растений надо делать рамки поменьше, 750х750, как раз одна рамка из одной доски.</p>
-
-<p>Где растёт трава, очень много комаров.</p>
-
-<p>Юля выкопала яму под чубушник, земля в этом месте - сплошной камень. Посадили чубушник, побрызгали всё от вредителей и пошли к владельцу кур за перегноем. Взяли пять мешков, Юля поболтала с хозяином, он утверждает, что яйца у них расходятся на ура, сколько привезёшь, столько и купят. Вообще надо бы как нибудь заняться, и привезти сразу побольше перегноя, потому что пока дают, надо брать, потому может и не стать. Но нужно время и нужны рабочие руки, а Паша, например, в этом году так и не приехал.</p>
-
-<p>Потом обработали всё &ldquo;Эпином&rdquo; и поехали домой, времени было около половины десятого, почти совсем темно. Я ещё успел собрать целый мешок мусора. Комаров к этому времени почти не стало.</p>
-
-<p>Вообще было бы неплохо построить на участке дом, чтобы никуда не уезжать.</p>
-
-<p>У Ивана на участке примерно с майских праздников створка ворот сорвана с петель, забор частично накренился, телефон у него не отвечает. Я бы с удовольствием купил себе его участок, не считаясь с расходами, нам бы эта территория очень пригодилась. Если же всё останется, как есть, то придётся строить забор по задней стороне.</p>
-
-<p>Доехали хорошо, на трассе строятся пункты приёма оплаты, но судя по их состоянию, к 1 июля их не откроют.</p>
-
-<p>Татьяна Александровна сейчас на Украине, предлагает отправить к ней детей. Некая её знакомая выложила на Одноклассниках фотографии.</p>
 ]]></content>
   </entry>
   
