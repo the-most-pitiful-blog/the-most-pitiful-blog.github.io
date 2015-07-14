@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "kak-ia-proviol-trinadtsatoie-iulia"
+title: "Как я провёл тринадцатое июля"
 date: 2015-07-13 19:57:04 +0300
 comments: true
 categories:
