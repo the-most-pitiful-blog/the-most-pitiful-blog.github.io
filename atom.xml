@@ -4,7 +4,7 @@
   <title><![CDATA[Здесь по-прежнему ничего не написано]]></title>
   <link href="http://maximkoo.github.io/atom.xml" rel="self"/>
   <link href="http://maximkoo.github.io/"/>
-  <updated>2015-07-15T15:35:51+03:00</updated>
+  <updated>2015-07-16T14:59:17+03:00</updated>
   <id>http://maximkoo.github.io/</id>
   <author>
     <name><![CDATA[maximkoo]]></name>
@@ -12,6 +12,90 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Как я уменьшаю фотографии]]></title>
+    <link href="http://maximkoo.github.io/blog/2015/07/16/kak-ia-umien'shaiu-fotoghrafii/"/>
+    <updated>2015-07-16T14:03:14+03:00</updated>
+    <id>http://maximkoo.github.io/blog/2015/07/16/kak-ia-umien&#8217;shaiu-fotoghrafii</id>
+    <content type="html"><![CDATA[<p>Вернувшись из отпуска, я немедленно сделал то, что надо было сделать до отпуска.</p>
+
+<p>1) я установил себе <strong>exiftool</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libimage-exiftool-perl</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Теперь я могу с лёгкостью выдернуть из любого RAW-файла встроенный jpeg. То же самое в Убунту можно проделать с помощью программки Shotwell, но получается отчень медленно, к тому же программка глючит.</p>
+
+<p>Ещё можно было бы поставить на фотоаппарате съёмку в RAW и JPEG одновременно, но это слишком просто.</p>
+
+<p>2) я установил гем <strong>FastImage Resize</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install fastimage_resize</span></code></pre></td></tr></table></div></figure>
+
+
+<p>C помощью него можно определить и изменить размеры изображения. Для работы он использует libgd (какая-то графическая библиотека вроде), так что я ещё проделал:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libgd2
+</span><span class='line'>sudo apt-get install libgd2-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>И немедленно написал программку для пожатия:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#rsz.rb</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;fastimage_resize&#39;</span>
+</span><span class='line'><span class="n">maxSize</span><span class="o">=</span><span class="mi">600</span>
+</span><span class='line'><span class="no">ARGV</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="nb">print</span> <span class="s2">&quot;Processing &quot;</span><span class="o">+</span><span class="n">x</span><span class="o">+</span><span class="s1">&#39; ...&#39;</span>
+</span><span class='line'><span class="n">dims</span><span class="o">=</span><span class="no">FastImage</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">pwd</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">x</span><span class="p">)</span>
+</span><span class='line'><span class="n">is_horiz</span><span class="o">=</span><span class="n">dims</span><span class="o">.</span><span class="n">first</span><span class="o">==</span><span class="n">dims</span><span class="o">.</span><span class="n">max</span> <span class="c1">#Horizontal?</span>
+</span><span class='line'><span class="no">FastImage</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">pwd</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">x</span><span class="p">,</span>
+</span><span class='line'>                 <span class="k">if</span> <span class="n">is_horiz</span> <span class="k">then</span> <span class="n">maxSize</span><span class="o">.</span><span class="n">to_i</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">,</span>
+</span><span class='line'>                 <span class="k">if</span> <span class="n">is_horiz</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">maxSize</span><span class="o">.</span><span class="n">to_i</span> <span class="k">end</span><span class="p">,</span>
+</span><span class='line'>               <span class="ss">:outfile</span><span class="o">=&gt;</span><span class="s2">&quot;/home/maximko/Octopress/source/images/2015/&quot;</span><span class="o">+</span><span class="n">x</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="o">+</span><span class="n">maxSize</span><span class="o">.</span><span class="n">to_s</span><span class="o">+</span><span class="s2">&quot;.&quot;</span><span class="p">))</span>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Finished&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">rsz</span><span class="o">.</span><span class="n">rb</span> <span class="no">IMG_20150710_144025</span><span class="o">.</span><span class="n">jpg</span> <span class="no">IMG_20150712_112742</span><span class="o">.</span><span class="n">jpg</span> <span class="no">IMG_20150714_125123</span><span class="o">.</span><span class="n">jpg</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Если в имени файла встречаются нелепые символы, например, скобки, то имя файла надо брать в кавычки. Пожимает нормально, насколько я могу судить, разница с XnView не выявлена. Кроме :outfile можно ещё указать :jpeg_quality.</p>
+
+<p>В Турции мне всё это пришлось бы очень кстати, я потратил немало времени на конвертацию и пожатие своих умильных фоточек. Что же, нет повода переживать, если мы когда-нибудь ещё куда-нибудь поедем, мне всё это непременно пригодится.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Как я провёл пятнадцатое июля]]></title>
+    <link href="http://maximkoo.github.io/blog/2015/07/15/kak-ia-proviol-piatnadtsatoie-iiulia/"/>
+    <updated>2015-07-15T16:36:05+03:00</updated>
+    <id>http://maximkoo.github.io/blog/2015/07/15/kak-ia-proviol-piatnadtsatoie-iiulia</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Как я провёл четырнадцатое июля]]></title>
@@ -81,6 +165,41 @@
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Как я провёл одиннадцатое июля]]></title>
+    <link href="http://maximkoo.github.io/blog/2015/07/11/kak-ia-proviol-odinnadtsatoie-iulia/"/>
+    <updated>2015-07-11T00:01:57+03:00</updated>
+    <id>http://maximkoo.github.io/blog/2015/07/11/kak-ia-proviol-odinnadtsatoie-iulia</id>
+    <content type="html"><![CDATA[<p>Утром позвонил отец, сказал, что выезжает к нам, своим ходом, потому что у мамы скачет давление. Я его встретил на Сходненской.</p>
+
+<p>Поля пошла в гости к Роме Куркину, а нам надо было ехать на участок - сажать, сажать, сажать. Отца с малышом мы завезли в Тушинский парк, а сами прямо оттуда помчались в Овсянниково. По бесплатной дороге, доехали хорошо.</p>
+
+<p>На участке с предыдущего дня ничего не поменялось. В ту яму, что я выкопал перед отпуском, мы посадили сливу &ldquo;Кубанская красавица&rdquo;, а в ту яму, что я выкопал вчера - вишню &ldquo;Гирлянда&rdquo;.</p>
+
+<p>Потом мы отправились к повелителю кур за помётом. Поскольку надо было навёрстывать упущенное время, взяли сразу две тачки. По дороге остановились у того непонятного участка возле поворота в поле. Юля сумела разговориться с тракторист, тракторист, несомненно, армянин. Он утверждал, что это его собственный участок, он его купил через администрацию по 120 тысяч за сотку под дачное строительство и будет строить домик. Зовут Арсен.</p>
+
+<p>У повелителя мы взяли семь мешков навоза, некоторые тяжёлые, некоторые неполные. Осталось не так много, мешков двенадцать. Обратно я пошёл вперед, чтобы потом вернуться и помочь Юле. Юля всё поняла буквально, остановилась там, где мы с ней разошлись и стала ждать. Так что я привёз две тачки.</p>
+
+<p>В некоторых мешках действительно что-то вроде навоза, вонючая каша, в некоторых просто как гнилая солома с резким аммиачным запахом. В одном мешке оказалась как будто коричневая земля, сыпучая и без запаха. Видимо, последнее - самое полезное для растений. &ldquo;Кашу&rdquo; вывалили под новые деревья и гортензию, &ldquo;соломой&rdquo; замульчировали виноград, &ldquo;землю&rdquo; всыпали под смородину.</p>
+
+<p>Посадили два куста смородины - чёрную смородину &ldquo;Нежданчик&rdquo; и красную &ldquo;&rdquo;. Юля ещё посадила жимолость. Редиска у нас что-то не задалась - дала стрелки с семенами и Юля её повыдергала. Из кабачков и тыкв один кабачок разросся, один примерно в том виде, в каком его посадили, остальные сдохли.</p>
+
+<p>Всё же простые грядки - это путь в тупик во всех отнощениях. Сорняки забивают всё в несколько дней, ягоды страдают от птиц, крыс и слизней. Обязательно надо затягивать грядки тканью, или чем-нибудь мульчировать, хоть камнями, а если есть возможность перейти на вертикальные грядки - то делать вертикальные.</p>
+
+<p>Между деревьев мы нашли то ли огромную мышь, то ли небольшую крысу с перегрызенным горлом. Видимо, наш поедатель клубники попался соседской кошке.</p>
+
+<p>Юля утверждает, что Иван протянул себе свет - у него появился электрощиток. По-моему, он у него был и раньше.</p>
+
+<p>Обратно доехали довольно быстро, через Лобню и круг. Заехали к Лене, передали ей зелёного лука.</p>
+
+<p>Дома отец с малышом уже вернулись из парка. Отец потушил нам баранину с картошкой. Потом мы с ним заехали к Роме, забрали Полю с кораблика и поехали в Раменки. Поля вначале выступала, что не хочет ехать &ldquo;потому что ей не с кем будет играть&rdquo;. Доехали быстро, без замечаний.</p>
+
+<p>Показал маме видео на телефоне, Поля всё время мешала, потому что хотела играть с бабушкой.</p>
+
+<p>Обратно доехал тоже быстро, через Кутузовский и Рублёвку. Припоминаю, что изначально станцию &ldquo;Раменки&rdquo; должны были открыть в VI квартале 2015 года, то есть уже скоро. Теперь открытие перенесли на 2016 год из-за того, что должна быть построена ещё станция &ldquo;Минская&rdquo;, как я понял, около мечети. Довольно бессмысленная затея, жилой застройки там нет, разве что можно будет входить от метро в Парк Победы с обратной стороны. Вообще всё сильно изменилось - как-то так вышло, что в конце 90-х и примерно по 2005 год всё стояло неизменным, а потом начало быстро меняться, и уже почти не осталось того, что я помню с тех пор, когда жил в Раменках. Считаю, что это хорошо и правильно, всё должно меняться.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Как я провёл десятое июля]]></title>
     <link href="http://maximkoo.github.io/blog/2015/07/10/kak-ia-proviol-diesiatoie-iulia/"/>
     <updated>2015-07-10T11:04:46+03:00</updated>
@@ -111,11 +230,11 @@
 
 <p>Как только я вернулсяЮ Юля тут же сказала, что надо ехать в Тушинский парк, потому что Поля пошла к Лене Куркиной, Лена собралась ехать с детьми ни Красную Площадь, а Юля ей предложила вместо этого пойти в Тушинский Парк, и теперь нам тоже надо туда ехать, чтобы их встретить. У помойки я нашёл отличную двадцатилитровую бутыль для дачи. Едва отъехали, как оказалось, что спущено правое переднее колесо, вот засада. Доехали до сервиса, который за проходной, нам там сперва сказали, что заняты, но потом всё же помогли. В колесе был обнаружен большой гвоздь со шляпкой. Что интересно, рядом с ним торчала ещё небольшая металлическая шпилька, но через неё не спускало. Вместо гвоздя работник нам поставил шнурок, денег он не просил, но мы всё же оставили 100 рублей. Юля сказала, что знает этого перца, он ей не раз чинил колесо для коляски. Видимо, и в этот раз он её узнал и согласился помочь.</p>
 
-<p><img class="right half" src="http://maximkoo.github.io/images/2015/IMG_9831__.jpg">Машину мы удачно поставили близ перехода, не доезжая ул.Фомичевой. В парке всё благоустаивается, везде дорожки, напротив центрального входа сделали обширную площадь с кафе. На набережной установили модное ограждение и продают кукурузу по 100 рублей. Тётенька продавщица нам объяснила, что кукуруза из Индии, и они её не варят, а просто пропаривают. Я всё пытался красиво фотографировать, но на меня никто не обращал внимания, так что вряд ли у меня хорошо получилось.</p>
+<p><img class="center" src="http://maximkoo.github.io/images/2015/IMG_9831__.jpg">Машину мы удачно поставили близ перехода, не доезжая ул.Фомичевой. В парке всё благоустаивается, везде дорожки, напротив центрального входа сделали обширную площадь с кафе. На набережной установили модное ограждение и продают кукурузу по 100 рублей. Тётенька продавщица нам объяснила, что кукуруза из Индии, и они её не варят, а просто пропаривают. Я всё пытался красиво фотографировать, но на меня никто не обращал внимания, так что вряд ли у меня хорошо получилось.</p>
 
 <p>Лену, Полю и Рому мы встретили на набережной. Малыш нашёл девочку Ларису с мамой и бегал вместе с ней. Потом Юля с Леной сидели наверху на лавочке, а я следил за всеми детьми одновременно на спортивной площадки. Туда ещё всё время приходили дрищи подтягиваться на турнике. Потом малыш взял у девочки Ларисы самокат, разогнался, нарочно въехал в канаву и упал руками в грязь. Пришлось идти с ним в туалет мыть руки. В туалете есть горячая вода, но нет бумаги (кончилась). Потом все ушли, а мы с малышом их догоняли, причём малыш отказался идти сам, настаивая, что у него болит ножка, которую он оцарапал в Турции, и мне пришлось нести его на руках. Ещё немного погуляли на площадке и поехали домой. Погрузились все вместе, доехали хорошо.</p>
 
-<p>Обрезали и обрызгали все растения на балконе от клеща. Остатки я вышел вылить на розу во дворе и за домом. Розы за домом очень разрослись, некоторые уже отцвели. Плетистые розы обе очень выросли, их даже не узнать. Что ещё более удивительно, та самая маленькая роза неизвестного происхождения, которую раньше трудно было отыскать в траве, разрослась и цветёт крупными жёлтыми цветами. Юля стала утверждать, что эту розу она вырастила из черенка, взятого у тётеньки в 17 мкр, но по-моему, это не сходится по времени. Все четыре розы из ОБИ: &ldquo;Laminuette&rdquo;, &ldquo;Kimono&rdquo;, &ldquo;Liane&rdquo; и &ldquo;Yellow Summer&rdquo; растут и цветут. Названия, насколько я могу судить, ничего не значат, на самом деле это какие-то другие розы.</p>
+<p><img class="right half" src="http://maximkoo.github.io/images/2015/IMG_20150712_112742(1)_600.jpg">Обрезали и обрызгали все растения на балконе от клеща. Остатки я вышел вылить на розу во дворе и за домом. Розы за домом очень разрослись, некоторые уже отцвели. Плетистые розы обе очень выросли, их даже не узнать. Что ещё более удивительно, та самая маленькая роза неизвестного происхождения, которую раньше трудно было отыскать в траве, разрослась и цветёт крупными жёлтыми цветами. Юля стала утверждать, что эту розу она вырастила из черенка, взятого у тётеньки в 17 мкр, но по-моему, это не сходится по времени. Все четыре розы из ОБИ: &ldquo;Laminuette&rdquo;, &ldquo;Kimono&rdquo;, &ldquo;Liane&rdquo; и &ldquo;Yellow Summer&rdquo; растут и цветут. Названия, насколько я могу судить, ничего не значат, на самом деле это какие-то другие розы.</p>
 
 <p>Лег спать очень поздно, почти в два часа. Дома настолько хорошо отдыхать, что жалко проспать время. Самые лучшие дни в году - в конце отпуска, когда поездка уже закончилась, а на работу ещё не надо.</p>
 ]]></content>
@@ -161,6 +280,8 @@
 <p><img class="left half" src="http://maximkoo.github.io/images/2015/IMG_20150709_191526.jpg"> Взлетели, опять к моему удивлению, точно вовремя. Дети вели себя отвратительно, пришлось пересадить Полю на своё место. Острое впечатление, что в центральной части салона сиденья шире, чем у борта. остаток пути Поля смотрела мультики, малыш вёл себя отвратительно, хотя и не капризничал. Покормили опять сэндвичами, но на этот раз булки были совсем не те, что в прошлый - не &ldquo;Юнибейк&rdquo;. Я съел свой сэндвич и Юлин, а Полин и Игорька мы припрятали с собой.</p>
 
 <p>Мы должны были прилететь в 21:05, но уже в 19-45 объявили, что скоро мы начнём снижение. Я даже думал, что у меня сбились часы. В начале девятого действительно началось снижение. Похоже, что самолёт долго кружил, мы видели внизу озёра Круглое и Долгое, Пироговское водохранилище, потом самолёт зашёл на посадку со стороны Дмитровки. У меня сильно заложило уши (и не разложило до сих пор, пишу десятого числа), левое даже болело. Как в детстве, в детстве у меня всегда болели уши при посадке. Сели минут на двадцать раньше плана. После касания я даже хлопнул надутым бумажным пакетом, как в книге Артура Викника.</p>
+
+<p>Сразу позвонил родителям, отец, оказывается, уехал в командировку в Липецк, т.е. он опять вышел на работу.</p>
 
 <p>Из самолёта вышли почти самыми последними, я занял очередь на паспортный контроль, Юля же, вместо того, чтобы занять другую очередь, немедленно спряталась в туалете. Излишне пояснять, что моя очередь двигалась медленнее всех остальных.</p>
 
@@ -507,230 +628,6 @@
 <p>Выставка проходила там же, где и в прошлый раз, выбор скромный, но у нас всё уже было заказано заранее. Тот мужичок с выставки всё продумал заранее - саженцы лежали у него в машине, а машина стояла в самом дальнем конце парка. Нам сначала пришлось тащиться через весь парк к машине, а потом нести на себе саженцы обратно. Мы купили сливы &ldquo;Венгерка&rdquo;, &ldquo;Царская&rdquo;, вишни &hellip;, и ещё сливу &ldquo;Деликатная&rdquo;, якобы она очень крупная и зимостойкая, но саженец был больше похож на прутик из метлы. Я так и не понял, Юля его заказывала, или тот предприимчивый мужичок всунул его нам в довесок. Юля ещё взяла смородину и жимолость. Жимолость была прямо с ягодками, ягоды похожи на чернику, но кислее. И потом мы, словно какие-то маргиналы, протащились с саженцами через весь парк. Все там гуляли, катались на веломобилях и ели мороженое, а мы волокли на себе саженцы. Возле аллеи с деревянными арками там устроен детский экстрим-парк, или как это правильно назвать, в общем там можно лазить между деревьями по канатным дорожкам и лестницам.</p>
 
 <p>Обратно ехали долго, потому что попали в пробку на Третьем кольце почти от Рижской до Ленинградки.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Как я провёл двадцать четвёртое июня]]></title>
-    <link href="http://maximkoo.github.io/blog/2015/06/24/kak-ia-proviol-dvadtsat'-chietviortoie-iiunia/"/>
-    <updated>2015-06-24T23:23:23+03:00</updated>
-    <id>http://maximkoo.github.io/blog/2015/06/24/kak-ia-proviol-dvadtsat&#8217;-chietviortoie-iiunia</id>
-    <content type="html"><![CDATA[<p>Пока шёл от работы к метро, над головой ходил угрожающие тучи и дождь обещал пойти вот-вот, но так и не пошёл.</p>
-
-<p>После работы встретились с Юлей на Сходненской, и Юля сказала,что ей надо в парикмахерский магазин, который находится на Сходненской улице за улицей Фабрициуса. Идти туда пешком по жаре я меня не было сил, так что мы поехали на машине. Тут выяснилось, что у нас совершенно закончился бензин, так что я высадил Юлю около магазина, а сам поехал заправляться. Вроде бы была заправка на Походном проезде. Заправка там действительно есть, &ldquo;Газпромнефть&rdquo;, но она, как оказалось, автоматическая. То есть кассира там нет, заправка принимает наличные или бонусные и топливные карты. К счастью, у меня при себе нашлось 200 рублей. В целом удобно, но лучше бы они, конечно, принимали банковские карты. На обратном пути потерял немного времени на улице Фабрициуса, там меняют бордюры. Сейчас в Москве идёт какая-то кампания по замене бордюров - зачем, я так и не понял.</p>
-
-<p>Перед Планерной улицей немного постояли в пробке.</p>
-
-<p>Вечером мы попытались воспроизвести жареный рис по-китайски, который я так мастерски приготовил, помешивая, на мастер-классе в Юнилевере. Правда, у нас не было китайского соуса из чёрного перца и рис мы заменили перловкой. И мясо Юля порезала совсем не так мелко, как надо. Я разогрел вок и принялся мастерски помешивать мясо, как меня научили в Юнилевере. Юлю это, видимо, как-то задело, и она налила в мясо разведённого крахмала. Мясо тут же слиплось в комок и помешивать его уже не получалось. Всё моё мастерство превратилось в тыкву.</p>
-
-<p>Потом я выложил мясо, высыпал <del>в сковороду</del> в вок нарезанный чеснок и разбил яйцо. Пока разбивал яйцо, чеснок успел пригореть. Потом добавил перловку и мясо, посолил и поперчил.</p>
-
-<p>Что имеем в результате:</p>
-
-<ul>
-<li>благодаря Юлиной находчивости всё мясо покрылось какими-то пресными соплями</li>
-<li>без соуса всё это блюдо никуда не годится. Сколько я ни перчил, всё равно выходит пресновато</li>
-<li>имея соус, рис можно заменить перловкой</li>
-</ul>
-
-
-<p>В целом с готовкой я управился, то есть мастер-класс прошёл не впустую. Можно было бы сходить ещё раз, если меня туда, конечно, пустят, а не развернут с позором прямо от двери, как дармоеда и нахлебника.</p>
-
-<p>Все розы во дворе расцвели, кроме Гран-При, но она тоже скоро зацветёт.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Как я перенёс фотоархив с работы домой]]></title>
-    <link href="http://maximkoo.github.io/blog/2015/06/23/kak-ia-pierienios-fotoarkhiv-s-raboty-domoi/"/>
-    <updated>2015-06-23T16:19:10+03:00</updated>
-    <id>http://maximkoo.github.io/blog/2015/06/23/kak-ia-pierienios-fotoarkhiv-s-raboty-domoi</id>
-    <content type="html"><![CDATA[<p>В общем, проблема переноса фотоархива с работы домой так окончательного решения и не находила. GoodSync отказался работать после истечения триального периода, я только зря потратил время на изучение.</p>
-
-<p>С некоторым усилием я развернул дома FTP-cервер, примечательно, что я использовал сервер, встроенный в Windows 7. С нетбука под Убунту на работе через офисный wifi я смог приконнектиться и даже скопировать файлик командой cp. Но мне надо было копировать много файлов и папок. Из рассмотренных программ:</p>
-
-<ul>
-<li>gFTP работает нормально, но спотыкается об уже существующие файлы и папки</li>
-<li>Double Commander неправильно отображает имена папок на удалённой стороне,и самое главное, после потери соединения не может переподключиться и его приходится перезапускать, а запускается он только из командной строки, в меню он не добавился.</li>
-<li>Midnight Commander вообще не работает, или я чего-то не понял. На вид полное убожество, разбираться желания не возникло.</li>
-</ul>
-
-
-<p>В общем, я прикинул так и этак, и сам написал программку для копировния на Ruby. Собственно, это первый осмысленный код, что я написал на Руби. Программка умеет копировать файлы по FTP, перебирая вложенные папки и копируя их структуру. Уже существующие файлы и папки пропускаются (достаточно совпадения имени).</p>
-
-<p>в файле <strong>copy_ftp_f.rb</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;net/ftp&#39;</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">FTPConn</span> <span class="o">&lt;</span> <span class="no">Net</span><span class="o">::</span><span class="no">FTP</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
-</span><span class='line'>      <span class="vi">@ftpc</span><span class="o">=</span><span class="no">Net</span><span class="o">::</span><span class="no">FTP</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;xxx.xxx.xxx.xxx&#39;</span><span class="p">)</span> <span class="c1">#IP-адрес</span>
-</span><span class='line'>      <span class="vi">@ftpc</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">ftpConn</span>
-</span><span class='line'>      <span class="vi">@ftpc</span>
-</span><span class='line'>  <span class="k">end</span>  
-</span><span class='line'>  <span class="k">def</span> <span class="nf">closeFtpConn</span>
-</span><span class='line'>      <span class="vi">@ftpc</span><span class="o">.</span><span class="n">close</span>
-</span><span class='line'>  <span class="k">end</span>  
-</span><span class='line'><span class="k">end</span>    
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">CopyFTP</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">pftp</span><span class="p">,</span> <span class="n">pfrom</span><span class="p">,</span> <span class="n">pto</span><span class="p">)</span>
-</span><span class='line'>      <span class="vi">@s1</span><span class="p">,</span><span class="vi">@s2</span><span class="o">=</span><span class="n">pfrom</span><span class="p">,</span><span class="n">pto</span>
-</span><span class='line'>      <span class="c1">#puts &#39;@s1=&#39;+@s1</span>
-</span><span class='line'>      <span class="c1">#puts &#39;@s2=&#39;+@s2</span>
-</span><span class='line'>      <span class="c1">#puts &#39;@s2(Basename)=&#39;+File.basename(@s2)</span>
-</span><span class='line'>      <span class="vi">@ftp</span><span class="o">=</span><span class="n">pftp</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">copyFolder</span>
-</span><span class='line'>      <span class="c1">#puts @ftp.nlst()</span>
-</span><span class='line'>      <span class="vi">@fi</span><span class="o">=</span><span class="vi">@ftp</span><span class="o">.</span><span class="n">nlst</span><span class="p">()</span>
-</span><span class='line'>      <span class="k">if</span> <span class="vi">@fi</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
-</span><span class='line'>          <span class="nb">puts</span> <span class="s1">&#39;FTP: trying to enter directory &#39;</span><span class="o">+</span><span class="vi">@s2</span>
-</span><span class='line'>          <span class="n">fff</span><span class="o">=</span><span class="vi">@ftp</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
-</span><span class='line'>          <span class="nb">puts</span> <span class="s1">&#39;Directory &#39;</span><span class="o">+</span><span class="vi">@s2</span><span class="o">+</span> <span class="s1">&#39; exists.&#39;</span>
-</span><span class='line'>      <span class="k">else</span>
-</span><span class='line'>          <span class="vi">@ftp</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
-</span><span class='line'>          <span class="nb">puts</span> <span class="s1">&#39;Directory &#39;</span><span class="o">+</span><span class="vi">@s2</span><span class="o">+</span> <span class="s1">&#39; created.&#39;</span>
-</span><span class='line'>          <span class="vi">@ftp</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
-</span><span class='line'>      <span class="k">end</span>  
-</span><span class='line'>      
-</span><span class='line'>      <span class="vi">@fi</span><span class="o">=</span><span class="vi">@ftp</span><span class="o">.</span><span class="n">nlst</span><span class="p">()</span>
-</span><span class='line'>      <span class="c1">#puts @fi</span>
-</span><span class='line'>      <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="vi">@s1</span><span class="o">+</span><span class="s1">&#39;/*&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
-</span><span class='line'>          <span class="k">if</span> <span class="no">File</span><span class="o">.</span><span class="n">file?</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</span><span class='line'>              <span class="nb">print</span> <span class="s1">&#39;Copy file &#39;</span><span class="o">+</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;...&#39;</span>
-</span><span class='line'>              <span class="k">if</span> <span class="ow">not</span> <span class="vi">@fi</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-</span><span class='line'>                  <span class="vi">@ftp</span><span class="o">.</span><span class="n">putbinaryfile</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</span><span class='line'>                  <span class="nb">puts</span> <span class="s1">&#39;copied&#39;</span>
-</span><span class='line'>              <span class="k">else</span>
-</span><span class='line'>                  <span class="nb">puts</span> <span class="s1">&#39;already exists!&#39;</span>
-</span><span class='line'>              <span class="k">end</span>
-</span><span class='line'>          <span class="k">else</span>
-</span><span class='line'>              <span class="nb">puts</span> <span class="s1">&#39;Entering directory &#39;</span><span class="o">+</span><span class="n">x</span>
-</span><span class='line'>              <span class="n">z</span><span class="o">=</span><span class="no">CopyFTP</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@ftp</span><span class="p">,</span> <span class="vi">@s1</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="vi">@s2</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-</span><span class='line'>              <span class="n">z</span><span class="o">.</span><span class="n">copyFolder</span>
-</span><span class='line'>          <span class="k">end</span>  
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>      <span class="vi">@ftp</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>  
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>в файле <strong>copy_home.rb</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;./copy_ftp_f.rb&#39;</span>
-</span><span class='line'><span class="n">f</span><span class="o">=</span><span class="no">FTPConn</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'><span class="n">fc</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">ftpConn</span>
-</span><span class='line'><span class="nb">p</span><span class="o">=</span><span class="no">CopyFTP</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span><span class="no">ARGV</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'><span class="nb">p</span><span class="o">.</span><span class="n">copyFolder</span>
-</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">closeFtpConn</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Для запуска из командной строки</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">copy_home</span><span class="o">.</span><span class="n">rb</span> <span class="sr">/home/m</span><span class="n">aximko</span><span class="o">/</span><span class="n">from_folder</span> <span class="n">to_folder</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Работает нормально.</p>
-
-<p>Как я начинаю понимать, если под Линуксом хочешь пользоваться нормальным софтом - пиши его сам! Тут вам не винда, где всё работает с самого начала, тут вам свобода, то есть ничего готового нет.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Как я провёл двадцать третье июня]]></title>
-    <link href="http://maximkoo.github.io/blog/2015/06/23/kak-ia-proviol-dvadtsat'-triet'ie-iiunia/"/>
-    <updated>2015-06-23T16:17:32+03:00</updated>
-    <id>http://maximkoo.github.io/blog/2015/06/23/kak-ia-proviol-dvadtsat&#8217;-triet&#8217;ie-iiunia</id>
-    <content type="html"><![CDATA[<p>После работы опять заехал в МФЦ, сдать документы на новый паспорт в УФМС. Обслуживание в МФЦ по-прежнему на высшем уровне, никаких очередей. Девушка в погонах предъявила мне обвинение в административном правонарушении и вынесла предупреждение, то есть штраф я не получил. Старый паспорт у меня забрали. Как-то мне с ним в целом не повезло, но, другой стороны, он мне прослужил так или иначе, двенадцать с половиной лет. Второго июля мне должны сделать новый паспорт и эти дурацкие проблемы с нотариусами уйдут в прошлое.</p>
-
-<p>Потом заехал домой, взял рабочую одежду и виноград. Пора его уже посадить, в конце концов, это мой подарок на ДР и стоит он 2000 рублей. Подобрал Юлю на Планерной и поехали на участок. Юля купила в дорогу две самсы с мясом. Доехали хорошо, но что-то мне показалось  долго. Всё же по новой дороге выходит 50 км, не так уж и мало.</p>
-
-<p>На участке посадили виноград, Юля начала поливать привезённой водой. У меня крепнет уверенность, что поливать водой прямо из колодца стоит лишь в крайнем случае, растения очень угнетаются. В прошлый раз поливали тёплой водой, всё сразу пошло в рост. Хорошо растёт порей, и даже тыквы/кабачки, которые явно обещали загнуться, тоже растут.</p>
-
-<p>Клубнику кто-то портит, возможно, это птицы. Я тут в инете нашёл способ устраивать вертикальные грядки из труб, как мне представляется, это хороший способ, помимо экономии места:</p>
-
-<p><img class="right half" src="http://maximkoo.github.io/images/2015/9d2a44.jpg" width="400"></p>
-
-<ul>
-<li>к ягодам не доберутся слизни и птицы</li>
-<li>клубника не затеняется сорняками</li>
-<li>легче поливать, если всё сделать аккуратно и грамотно</li>
-<li>ягоды не лежат на земле</li>
-</ul>
-
-
-<p>Потом я стал копать яму под вишню на месте, где раньше лежал торф. Копать очень тяжело, в этом месте очень плотная влажная глина, и <strong>очень</strong> много камней, не помню, чтобы я где&ndash;то встречал столько камней сразу + ещё две бутылки и два куска проволоки. От земли воняет какой-то тухлятиной, похоже, в этом месте было болотце.</p>
-
-<p>Потом надо было ещё наполнить ёмкости под следующий полив, с огромным трудом вытащил 11 вёдер. Тащил прямо из последних сил. Не знаю, как я раньше вытаскивал по 20-30 вёдер. Комары нас просто сожрали, возле колодца какой-то рассадник комаров. Обратно доехали хорошо, но я так устал, что еле доехал.</p>
 ]]></content>
   </entry>
   
