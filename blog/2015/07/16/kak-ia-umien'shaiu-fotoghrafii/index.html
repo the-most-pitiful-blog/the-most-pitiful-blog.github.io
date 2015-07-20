@@ -126,16 +126,14 @@ sudo apt-get install libimage- &hellip;">
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-<span class='line-number'>12</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#rsz.rb</span>
 </span><span class='line'><span class="nb">require</span> <span class="s1">&#39;fastimage_resize&#39;</span>
 </span><span class='line'><span class="n">maxSize</span><span class="o">=</span><span class="mi">600</span>
 </span><span class='line'><span class="no">ARGV</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="nb">print</span> <span class="s2">&quot;Processing &quot;</span><span class="o">+</span><span class="n">x</span><span class="o">+</span><span class="s1">&#39; ...&#39;</span>
 </span><span class='line'><span class="n">dims</span><span class="o">=</span><span class="no">FastImage</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">pwd</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">x</span><span class="p">)</span>
-</span><span class='line'><span class="n">is_horiz</span><span class="o">=</span><span class="n">dims</span><span class="o">.</span><span class="n">first</span><span class="o">==</span><span class="n">dims</span><span class="o">.</span><span class="n">max</span> <span class="c1">#Horizontal?</span>
 </span><span class='line'><span class="no">FastImage</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">pwd</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">x</span><span class="p">,</span>
-</span><span class='line'>                 <span class="k">if</span> <span class="n">is_horiz</span> <span class="k">then</span> <span class="n">maxSize</span><span class="o">.</span><span class="n">to_i</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">,</span>
-</span><span class='line'>                 <span class="k">if</span> <span class="n">is_horiz</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">maxSize</span><span class="o">.</span><span class="n">to_i</span> <span class="k">end</span><span class="p">,</span>
+</span><span class='line'>                 <span class="k">if</span> <span class="n">dims</span><span class="o">.</span><span class="n">first</span><span class="o">==</span><span class="n">dims</span><span class="o">.</span><span class="n">max</span> <span class="k">then</span> <span class="n">maxSize</span><span class="o">.</span><span class="n">to_i</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">,</span>
+</span><span class='line'>                 <span class="k">if</span> <span class="n">dims</span><span class="o">.</span><span class="n">first</span><span class="o">==</span><span class="n">dims</span><span class="o">.</span><span class="n">max</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">maxSize</span><span class="o">.</span><span class="n">to_i</span> <span class="k">end</span><span class="p">,</span>
 </span><span class='line'>               <span class="ss">:outfile</span><span class="o">=&gt;</span><span class="s2">&quot;/home/maximko/Octopress/source/images/2015/&quot;</span><span class="o">+</span><span class="n">x</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="o">+</span><span class="n">maxSize</span><span class="o">.</span><span class="n">to_s</span><span class="o">+</span><span class="s2">&quot;.&quot;</span><span class="p">))</span>
 </span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Finished&quot;</span>
 </span><span class='line'><span class="p">}</span>
@@ -185,7 +183,7 @@ sudo apt-get install libimage- &hellip;">
         <a class="basic-alignment left" href="/blog/2015/07/14/kak-ia-proviol-chietyrnadtsatoie-iiulia/" title="Previous Post: Как я провёл четырнадцатое июля">&laquo; Как я провёл четырнадцатое июля</a>
       
       
-        <a class="basic-alignment right" href="/blog/2015/07/18/kak-ia-proviol-vosemnadtsatoie-iiulia/" title="Next Post: Как я провёл восемнадцатое июля">Как я провёл восемнадцатое июля &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2015/07/17/kak-ia-proviol-siemnadtsatoie-iiulia/" title="Next Post: Как я провёл семнадцатое июля">Как я провёл семнадцатое июля &raquo;</a>
       
     </p>
   </footer>
@@ -200,7 +198,15 @@ sudo apt-get install libimage- &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/19/kak-ia-proviol-dieviatnadtsatoie-iiulia/">Kak-ia-proviol-dieviatnadtsatoie-iiulia</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/18/kak-ia-proviol-vosemnadtsatoie-iiulia/">Как я провёл восемнадцатое июля</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/17/kak-ia-proviol-siemnadtsatoie-iiulia/">Как я провёл семнадцатое июля</a>
       </li>
     
       <li class="post">
@@ -272,7 +278,7 @@ sudo apt-get install libimage- &hellip;">
       </li>
     
       <li class="post">
-        <a href="/blog/2015/06/27/kak-ia-proviol-dvadtsat'-sied'moie-iiunia/">Как я провёл двадцать седьмое мая</a>
+        <a href="/blog/2015/06/27/Kak-ia-proviol-dvadtsat'-sied'moie-iiunia/">Как я провёл двадцать седьмое мая</a>
       </li>
     
       <li class="post">
@@ -309,14 +315,6 @@ sudo apt-get install libimage- &hellip;">
     
       <li class="post">
         <a href="/blog/2015/06/17/kak-ia-proviol-siemnadtsatoie-iiunia/">Как я провёл семнадцатое июня</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/06/16/kak-ia-proviol-shiestnadtsatoie-iiunia/">Как я провёл шестнадцатое июня</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/06/14/kak-my-iezdili-v-voroniezh/">Как мы ездили в Воронеж</a>
       </li>
     
   </ul>
