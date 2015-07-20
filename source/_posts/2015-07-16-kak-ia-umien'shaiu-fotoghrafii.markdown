@@ -36,10 +36,9 @@ require 'fastimage_resize'
 maxSize=600
 ARGV.each{|x| print "Processing "+x+' ...'
 dims=FastImage.size(Dir.pwd+'/'+x)
-is_horiz=dims.first==dims.max #Horizontal?
 FastImage.resize(Dir.pwd+"/"+x,
-                 if is_horiz then maxSize.to_i else 0 end,
-                 if is_horiz then 0 else maxSize.to_i end,
+                 if dims.first==dims.max then maxSize.to_i else 0 end,
+                 if dims.first==dims.max then 0 else maxSize.to_i end,
  	             :outfile=>"/home/maximko/Octopress/source/images/2015/"+x.gsub(".","_"+maxSize.to_s+"."))
 puts "Finished"
 }
