@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Как я провёл двадцать шестое июля"
-date: 2015-07-27 19:57:29 +0300
+date: 2015-07-26 19:57:29 +0300
 comments: true
 categories: 
 published: true
