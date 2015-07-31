@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://maximkoo.github.io/blog/2015/07/30/kak-ia-proviol-tridtsatoie-iiulia/</loc>
+    <lastmod>2015-07-30T21:45:19+03:00</lastmod>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/blog/2015/07/29/kak-ia-proviol-dvadtsat&#8217;-dieviatoie-iiulia/</loc>
+    <lastmod>2015-07-29T09:46:27+03:00</lastmod>
+  </url>
+  <url>
     <loc>http://maximkoo.github.io/blog/2015/07/28/kak-ia-proviol-dvadtsat&#8217;-vos&#8217;moie-iiulia/</loc>
     <lastmod>2015-07-28T16:43:02+03:00</lastmod>
   </url>
   <url>
-    <loc>http://maximkoo.github.io/blog/2015/07/27/kak-ia-proviol-dvadtsat&#8217;-shiestoie-iiulia/</loc>
-    <lastmod>2015-07-27T19:57:29+03:00</lastmod>
-  </url>
-  <url>
     <loc>http://maximkoo.github.io/blog/2015/07/27/kak-ia-proviol-dvadtsat&#8217;-sied&#8217;moie-iiulia/</loc>
     <lastmod>2015-07-27T09:57:38+03:00</lastmod>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/blog/2015/07/26/kak-ia-proviol-dvadtsat&#8217;-shiestoie-iiulia/</loc>
+    <lastmod>2015-07-26T19:57:29+03:00</lastmod>
   </url>
   <url>
     <loc>http://maximkoo.github.io/blog/2015/07/25/kak-ia-proviol-dvadtsat&#8217;-piatoie-iiulia/</loc>
@@ -353,5 +361,29 @@
   </url>
   <url>
     <loc>http://maximkoo.github.io/blog/categories/turtsiia-2015/</loc>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/posts/2/</loc>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/posts/3/</loc>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/posts/4/</loc>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/posts/5/</loc>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/posts/6/</loc>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/posts/7/</loc>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/posts/8/</loc>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/posts/9/</loc>
   </url>
 </urlset>
