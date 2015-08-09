@@ -4,7 +4,7 @@
   <title><![CDATA[Здесь по-прежнему ничего не написано]]></title>
   <link href="http://maximkoo.github.io/atom.xml" rel="self"/>
   <link href="http://maximkoo.github.io/"/>
-  <updated>2015-08-09T17:47:04+03:00</updated>
+  <updated>2015-08-09T18:39:54+03:00</updated>
   <id>http://maximkoo.github.io/</id>
   <author>
     <name><![CDATA[maximkoo]]></name>
@@ -21,11 +21,11 @@
     <content type="html"><![CDATA[<p>﻿&mdash;
 layout: post
 title: &ldquo;Как я провёл седьмое августа&rdquo;
-date: 2015-08-07 16:11:10 +0300
+date: 2015-08-07 16:11:43 +0300
 comments: true
 categories:</p>
 
-<h2>published: false</h2>
+<h2>published: true</h2>
 
 <p>С вечера мы ничего не приготовили поесть, поэтому с утра я мужественно зашёл в Макдак и взял два фреш-ролла. Один сел с утра, другой приберёг, чтобы съесть после тренировки. В зале опять пытался выжать 90х3х10, выжал только лишь 10,10,8.</p>
 
@@ -36,44 +36,6 @@ categories:</p>
 <p><img class="center" src="http://maximkoo.github.io/images/2015/IMG_20150807_194544.jpg"></p>
 
 <p>К вечеру очень хотелось есть. С непривычки я как-то очень неосмотрительно взялся за еду - поел жареньй картошки с яйцом, потом Юля ещё потушила морские гребешки+ ещё пара бутербродиков и печенья. Я так объелся, как не объедался уже очень давно, всё же я более или менее слежу за питанием. Мне было очень плохо, я не мог уснуть и даже нормально лечь. Допоздна читал учебник по Rails, узнал массу нового, важного и интересного. Из-за этого уснул очень поздно, хотя ввиду завтрашней съемки надо было бы лечь пораньше.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Kak Ia Proviol Shiestoie Avghusta]]></title>
-    <link href="http://maximkoo.github.io/blog/2015/08/06/kak-ia-proviol-shiestoie-avghusta/"/>
-    <updated>2015-08-06T00:00:00+03:00</updated>
-    <id>http://maximkoo.github.io/blog/2015/08/06/kak-ia-proviol-shiestoie-avghusta</id>
-    <content type="html"><![CDATA[<p>﻿&mdash;
-layout: post
-title: &ldquo;Как я провёл шестое августа&rdquo;
-date: 2015-08-06 12:59:54 +0300
-comments: true
-categories:</p>
-
-<h2>published: true</h2>
-
-<p>С утра встал попозже и поехал сдавать кровь в Центр крови ФМБА. Со мной поехал один коллега с работы. Я ему заранее всё объяснил про режим и питание и прислал ссылку. Прибыли на место чуть раньше девяти часов. Я рассчитывал, что после девяти часов как раз схлынут те, кто пришёл к открытию и будет более или менее свободно.</p>
-
-<p>Выйдя из регистратуры, я сразу понял, что все мои надежды лопнули, потому что народу было ещё больше, чем в прошлый раз (24 апреля). А ведь сегодня даже не пятница! В прошлый раз я проторчал в очереди целый час, а в этот, похоже, предстояло сидеть дольше. Однако, к терапевту я попал ровно через час.</p>
-
-<p>И тут оказалось, что моего коллегу с работы терапевт равернул, потому что у него хватило ума сказать, что он с утра ел &ldquo;рыбный супчик&rdquo;. Хотя я ему отчётливо объяснил, что на этот вопрос надо отвечать &ldquo;чай и сушки&rdquo; и прислал ссылку на питание для доноров. Я себе чуть руку не сломал от фейспалма. Кстати, я вполне понимаю терапевта, вполне возможно, что в том рыбном супчике и не было ничего страшного, но если кто-то после всех предупреждений как ни в чём не бывало сообщает о нём врачу, то таких надо разворачивать просто за бестолковость!</p>
-
-<p>Дальше всё прошло очень быстро. Кровь из пальца берут металлическим скарификатором, второй раз уже. Где пластмассовые щёлкалки? Выпил чаю в буфете и пошёл сдавать. Во время сдачи также не упустил случая сделать селфи.</p>
-
-<p><img class="center" src="http://maximkoo.github.io/images/2015/IMG_20150806_103027_600.jpg"></p>
-
-<p>Медсестра мне сказала, что свободнее всего в понедельник, в следующий раз так и сделаю. За сдачу сейчас платят 815 рублей. Вышли в 10-40.</p>
-
-<p>До метро можно было с пафосом доехать на трамвае, но мы прошли пешком. На работу приехали в начале двенадцатого.</p>
-
-<p>По новостям доллар и евро перевалили 64 и 70 рублей соответственно впервые с марта. По яндексу курс 63.86 и 69.63. Кто играет на Форексе, тот, наверное, озолотился в эти дни, при условии, что всё правильно угадал.</p>
-
-<p>Продолжаю ковыряться с видео, даже на то, чтобы просто разобрать фрагменты по темам, уходит море времени.</p>
-
-<p>Подозреваю, что это выглядит смищно и глупо - но я написал на Rails &ldquo;приложение&rdquo;, которое выводит картинки, зарегистрированные в БД.</p>
-
-<p>У Юли на работе проблемы из-за того, что она слишком дёшево продала полтонны сёмги.</p>
 ]]></content>
   </entry>
   
@@ -650,6 +612,85 @@ categories:</p>
 <img class="center" src="http://maximkoo.github.io/images/2015/IMG_20150717_191157_600.jpg"></p>
 
 <p>В гараже погрузили вагонку. Некогда, с 1998 по примерно 2012 годы, ей был обит балкон, а теперь ей будет обита наша бытовка. До дома доехали очень быстро, через Мичуринский и МКАД. Несмотря на пятницу, машин крайне немного. Единственный раз задержались на светофоре у перехода в конце Мичуринского, и то всего лишь на несколько секунд.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Как я уменьшаю фотографии]]></title>
+    <link href="http://maximkoo.github.io/blog/2015/07/16/kak-ia-umien'shaiu-fotoghrafii/"/>
+    <updated>2015-07-16T14:03:14+03:00</updated>
+    <id>http://maximkoo.github.io/blog/2015/07/16/kak-ia-umien&#8217;shaiu-fotoghrafii</id>
+    <content type="html"><![CDATA[<p>Вернувшись из отпуска, я немедленно сделал то, что надо было сделать до отпуска.</p>
+
+<p>1) я установил себе <strong>exiftool</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libimage-exiftool-perl</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Теперь я могу с лёгкостью выдернуть из любого RAW-файла встроенный jpeg.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>exiftool -b -PreviewImage -w _embedded.jpg IMG_9277.CR2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>То же самое в Убунту можно проделать с помощью программки Shotwell, но получается отчень медленно, к тому же программка глючит.</p>
+
+<p>Ещё можно было бы поставить на фотоаппарате съёмку в RAW и JPEG одновременно, но это слишком просто.  <a href="http://www.sno.phy.queensu.ca/~phil/exiftool/exiftool_pod.html">Полный перечень команд exiftool</a>.</p>
+
+<p>2) я установил гем <strong>FastImage Resize</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install fastimage_resize</span></code></pre></td></tr></table></div></figure>
+
+
+<p>C помощью него можно определить и изменить размеры изображения. Для работы он использует libgd (какая-то графическая библиотека вроде), так что я ещё проделал:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libgd2
+</span><span class='line'>sudo apt-get install libgd2-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>И немедленно написал программку для пожатия:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#rsz.rb</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;fastimage_resize&#39;</span>
+</span><span class='line'><span class="n">maxSize</span><span class="o">=</span><span class="mi">600</span>
+</span><span class='line'><span class="no">ARGV</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="nb">print</span> <span class="s2">&quot;Processing &quot;</span><span class="o">+</span><span class="n">x</span><span class="o">+</span><span class="s1">&#39; ...&#39;</span>
+</span><span class='line'><span class="n">dims</span><span class="o">=</span><span class="no">FastImage</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">pwd</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">x</span><span class="p">)</span>
+</span><span class='line'><span class="no">FastImage</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">pwd</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">x</span><span class="p">,</span>
+</span><span class='line'>                 <span class="k">if</span> <span class="n">dims</span><span class="o">.</span><span class="n">first</span><span class="o">==</span><span class="n">dims</span><span class="o">.</span><span class="n">max</span> <span class="k">then</span> <span class="n">maxSize</span><span class="o">.</span><span class="n">to_i</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">,</span>
+</span><span class='line'>                 <span class="k">if</span> <span class="n">dims</span><span class="o">.</span><span class="n">first</span><span class="o">==</span><span class="n">dims</span><span class="o">.</span><span class="n">max</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">maxSize</span><span class="o">.</span><span class="n">to_i</span> <span class="k">end</span><span class="p">,</span>
+</span><span class='line'>               <span class="ss">:outfile</span><span class="o">=&gt;</span><span class="s2">&quot;/home/maximko/Octopress/source/images/2015/&quot;</span><span class="o">+</span><span class="n">x</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="o">+</span><span class="n">maxSize</span><span class="o">.</span><span class="n">to_s</span><span class="o">+</span><span class="s2">&quot;.&quot;</span><span class="p">))</span>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Finished&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">rsz</span><span class="o">.</span><span class="n">rb</span> <span class="no">IMG_20150710_144025</span><span class="o">.</span><span class="n">jpg</span> <span class="no">IMG_20150712_112742</span><span class="o">.</span><span class="n">jpg</span> <span class="no">IMG_20150714_125123</span><span class="o">.</span><span class="n">jpg</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Если в имени файла встречаются нелепые символы, например, скобки, то имя файла надо брать в кавычки. Пожимает нормально, насколько я могу судить, разница с XnView не выявлена. Кроме :outfile можно ещё указать :jpeg_quality.</p>
+
+<p>В Турции мне всё это пришлось бы очень кстати, я потратил немало времени на конвертацию и пожатие своих умильных фоточек. Что же, нет повода переживать, если мы когда-нибудь ещё куда-нибудь поедем, мне всё это непременно пригодится.</p>
 ]]></content>
   </entry>
   
