@@ -4,7 +4,7 @@ title: "Как я провёл двадцать восьмое августа"
 date: 2015-08-28 08:51:54 +0300
 comments: true
 categories: 
-published: false
+published: true
 ---
 {% img center /images/2015/IMG_20150828_065323_700.jpg %}
 
