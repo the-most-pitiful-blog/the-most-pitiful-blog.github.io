@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "kak-ia-proviol-dvadtsat-chietviortoie-sientiabria"
+title: "Как я провёл двадцать третье сентября"
 date: 2015-09-23 19:38:12 +0300
 comments: true
 categories: 
