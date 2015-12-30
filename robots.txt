@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: 
-
-Sitemap: http://maximkoo.github.io/OctopressREPO/sitemap.xml 
