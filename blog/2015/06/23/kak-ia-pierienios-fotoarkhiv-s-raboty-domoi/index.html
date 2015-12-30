@@ -1,0 +1,443 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Как я перенёс фотоархив с работы домой - Здесь по-прежнему ничего не написано</title>
+  <meta name="author" content="maximkoo">
+
+  
+  <meta name="description" content="В общем, проблема переноса фотоархива с работы домой так окончательного решения и не находила. GoodSync отказался работать после истечения триального &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://maximkoo.github.io/blog/2015/06/23/kak-ia-pierienios-fotoarkhiv-s-raboty-domoi/">
+  <link href="/10842629.jpg" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Здесь по-прежнему ничего не написано" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Здесь по-прежнему ничего не написано</a></h1>
+  
+    <h2>Самый унылый бложик на свете</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="maximkoo.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Как я перенёс фотоархив с работы домой</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-23T16:19:10+03:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>4:19 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>В общем, проблема переноса фотоархива с работы домой так окончательного решения и не находила. GoodSync отказался работать после истечения триального периода, я только зря потратил время на изучение.</p>
+
+<p>С некоторым усилием я развернул дома FTP-cервер, примечательно, что я использовал сервер, встроенный в Windows 7. С нетбука под Убунту на работе через офисный wifi я смог приконнектиться и даже скопировать файлик командой cp. Но мне надо было копировать много файлов и папок. Из рассмотренных программ:</p>
+
+<ul>
+<li>gFTP работает нормально, но спотыкается об уже существующие файлы и папки</li>
+<li>Double Commander неправильно отображает имена папок на удалённой стороне,и самое главное, после потери соединения не может переподключиться и его приходится перезапускать, а запускается он только из командной строки, в меню он не добавился.</li>
+<li>Midnight Commander вообще не работает, или я чего-то не понял. На вид полное убожество, разбираться желания не возникло.</li>
+</ul>
+
+
+<p>В общем, я прикинул так и этак, и сам написал программку для копировния на Ruby. Собственно, это первый осмысленный код, что я написал на Руби. Программка умеет копировать файлы по FTP, перебирая вложенные папки и копируя их структуру. Уже существующие файлы и папки пропускаются (достаточно совпадения имени).</p>
+
+<p>в файле <strong>copy_ftp_f.rb</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;net/ftp&#39;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">FTPConn</span> <span class="o">&lt;</span> <span class="no">Net</span><span class="o">::</span><span class="no">FTP</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>      <span class="vi">@ftpc</span><span class="o">=</span><span class="no">Net</span><span class="o">::</span><span class="no">FTP</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;xxx.xxx.xxx.xxx&#39;</span><span class="p">)</span> <span class="c1">#IP-адрес</span>
+</span><span class='line'>      <span class="vi">@ftpc</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">ftpConn</span>
+</span><span class='line'>      <span class="vi">@ftpc</span>
+</span><span class='line'>  <span class="k">end</span>  
+</span><span class='line'>  <span class="k">def</span> <span class="nf">closeFtpConn</span>
+</span><span class='line'>      <span class="vi">@ftpc</span><span class="o">.</span><span class="n">close</span>
+</span><span class='line'>  <span class="k">end</span>  
+</span><span class='line'><span class="k">end</span>    
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">CopyFTP</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">pftp</span><span class="p">,</span> <span class="n">pfrom</span><span class="p">,</span> <span class="n">pto</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@s1</span><span class="p">,</span><span class="vi">@s2</span><span class="o">=</span><span class="n">pfrom</span><span class="p">,</span><span class="n">pto</span>
+</span><span class='line'>      <span class="c1">#puts &#39;@s1=&#39;+@s1</span>
+</span><span class='line'>      <span class="c1">#puts &#39;@s2=&#39;+@s2</span>
+</span><span class='line'>      <span class="c1">#puts &#39;@s2(Basename)=&#39;+File.basename(@s2)</span>
+</span><span class='line'>      <span class="vi">@ftp</span><span class="o">=</span><span class="n">pftp</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">copyFolder</span>
+</span><span class='line'>      <span class="c1">#puts @ftp.nlst()</span>
+</span><span class='line'>      <span class="vi">@fi</span><span class="o">=</span><span class="vi">@ftp</span><span class="o">.</span><span class="n">nlst</span><span class="p">()</span>
+</span><span class='line'>      <span class="k">if</span> <span class="vi">@fi</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="s1">&#39;FTP: trying to enter directory &#39;</span><span class="o">+</span><span class="vi">@s2</span>
+</span><span class='line'>          <span class="n">fff</span><span class="o">=</span><span class="vi">@ftp</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="s1">&#39;Directory &#39;</span><span class="o">+</span><span class="vi">@s2</span><span class="o">+</span> <span class="s1">&#39; exists.&#39;</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>          <span class="vi">@ftp</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="s1">&#39;Directory &#39;</span><span class="o">+</span><span class="vi">@s2</span><span class="o">+</span> <span class="s1">&#39; created.&#39;</span>
+</span><span class='line'>          <span class="vi">@ftp</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
+</span><span class='line'>      <span class="k">end</span>  
+</span><span class='line'>      
+</span><span class='line'>      <span class="vi">@fi</span><span class="o">=</span><span class="vi">@ftp</span><span class="o">.</span><span class="n">nlst</span><span class="p">()</span>
+</span><span class='line'>      <span class="c1">#puts @fi</span>
+</span><span class='line'>      <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="vi">@s1</span><span class="o">+</span><span class="s1">&#39;/*&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
+</span><span class='line'>          <span class="k">if</span> <span class="no">File</span><span class="o">.</span><span class="n">file?</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span class='line'>              <span class="nb">print</span> <span class="s1">&#39;Copy file &#39;</span><span class="o">+</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;...&#39;</span>
+</span><span class='line'>              <span class="k">if</span> <span class="ow">not</span> <span class="vi">@fi</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span><span class='line'>                  <span class="vi">@ftp</span><span class="o">.</span><span class="n">putbinaryfile</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span class='line'>                  <span class="nb">puts</span> <span class="s1">&#39;copied&#39;</span>
+</span><span class='line'>              <span class="k">else</span>
+</span><span class='line'>                  <span class="nb">puts</span> <span class="s1">&#39;already exists!&#39;</span>
+</span><span class='line'>              <span class="k">end</span>
+</span><span class='line'>          <span class="k">else</span>
+</span><span class='line'>              <span class="nb">puts</span> <span class="s1">&#39;Entering directory &#39;</span><span class="o">+</span><span class="n">x</span>
+</span><span class='line'>              <span class="n">z</span><span class="o">=</span><span class="no">CopyFTP</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@ftp</span><span class="p">,</span> <span class="vi">@s1</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="vi">@s2</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span><span class='line'>              <span class="n">z</span><span class="o">.</span><span class="n">copyFolder</span>
+</span><span class='line'>          <span class="k">end</span>  
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="vi">@ftp</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>  
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>в файле <strong>copy_home.rb</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;./copy_ftp_f.rb&#39;</span>
+</span><span class='line'><span class="n">f</span><span class="o">=</span><span class="no">FTPConn</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">fc</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">ftpConn</span>
+</span><span class='line'><span class="nb">p</span><span class="o">=</span><span class="no">CopyFTP</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span><span class="no">ARGV</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'><span class="nb">p</span><span class="o">.</span><span class="n">copyFolder</span>
+</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">closeFtpConn</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Для запуска из командной строки</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">copy_home</span><span class="o">.</span><span class="n">rb</span> <span class="sr">/home/m</span><span class="n">aximko</span><span class="o">/</span><span class="n">from_folder</span> <span class="n">to_folder</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Работает нормально.</p>
+
+<p>Как я начинаю понимать, если под Линуксом хочешь пользоваться нормальным софтом - пиши его сам! Тут вам не винда, где всё работает с самого начала, тут вам свобода, то есть ничего готового нет.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">maximkoo</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-06-23T16:19:10+03:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>4:19 pm</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/06/23/kak-ia-proviol-dvadtsat'-triet'ie-iiunia/" title="Previous Post: Как я провёл двадцать третье июня">&laquo; Как я провёл двадцать третье июня</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/06/24/kak-ia-proviol-dvadtsat'-chietviortoie-iiunia/" title="Next Post: Как я провёл двадцать четвёртое июня">Как я провёл двадцать четвёртое июня &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/12/30/kak-ia-proviol-30-diekabria/">Как я провёл 30 декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/29/kak-ia-proviol-dvadtsat'-dieviatoie-diekabria/">Как я провёл двадцать девятое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/28/kak-ia-proviol-dvadtsat'-vos'moie-diekabria/">Как я провёл двадцать восьмое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/27/kak-ia-proviol-dvadtsat-siedmoie-diekabria/">Как я провёл двадцать седьмое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/26/kak-ia-proviol-dvadtsat-shiestoie-diekabria/">Как я провёл двадцать шестое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/25/kak-ia-proviol-dvadtsat'-piatoie-diekabria/">Как я провёл двадцать пятое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/24/kak-ia-proviol-dvadtsat-chietviortoie-diekabia/">Как я провёл двадцать четвёртое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/23/kak-ia-proviol-dvadtsat'-triet'ie-diekabria/">Как я провёл двадцать третье декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/22/kak-ia-proviol-dvadtsat'-vtoroie-diekabria/">Как я провёл двадцать второе декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/21/kak-ia-proviol-dvadtsat'-piervoie-diekabria/">Как я провёл двадцать первое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/20/kak-ia-proviol-dvadtsatoie-diekabria/">Как я провёл двадцатое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/19/kak-ia-proviol-dieviatnadtsatoie-diekabria/">Как я провёл девятнадцатое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/18/kak-ia-proviol-vosiemnadtsatoie-diekabria/">Как я провёл восемнадцатое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/17/kak-ia-proviol-siemnadtsatoie-diekabria/">Как я провёл семнадцатое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/16/kak-ia-proviol-shiestnadtsatoie-diekabria/">Как я провёл шестнадцатое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/15/kak-ia-proviol-piatnadtsatoie-diekabria/">Как я провёл пятнадцатое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/14/kak-ia-proviol-chietyrnadtsatoie-diekabria/">Как я провёл четырнадцатое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/13/kak-ia-proviol-trinadtsatoie-diekabia/">Как я провёл тринадцатое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/12/kak-ia-proviol-dvienadtsatoie-diekabia/">Как я провёл двенадцатое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/10/kak-ia-proviol-diesiatoie-diekabria/">Как я провёл десятое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/09/kak-ia-proviol-dieviatoie-diekabria/">Как я провёл девятое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/08/kak-ia-proviol-vos'moie-diekabria/">Как я провёл восьмое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/07/kak-ia-proviol-sied'moie-diekabria/">Как я провёл седьмое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/06/kak-ia-proviol-shestoie-diekabria/">Как я провёл шестое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/05/kak-ia-proviol-piatoie-diekabria/">Как я провёл пятое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/04/kak-ia-proviol-chietviortoie-diekabria/">Как я провёл четвёртое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/03/kak-ia-proviol-triet'ie-diekabria/">Как я провёл третье декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/02/kak-ia-proviol-vtoroie-diekabria/">Как я провёл второе декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/01/kak-ia-proviol-piervoie-diekabria/">Как я провёл первое декабря</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/30/kak-ia-proviol-tridtsatoie-noiabria/">Как я провёл тридцатое ноября</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - maximkoo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
