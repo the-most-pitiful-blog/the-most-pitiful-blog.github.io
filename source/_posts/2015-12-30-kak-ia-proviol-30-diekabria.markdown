@@ -15,24 +15,24 @@ categories:
 
 В папке Documents
 
-````
+
 git clone -b source https://github.com/maximkoo/maximkoo.github.io.git Octopress
-```
+
 
 Тут он создаёт папку /Octopress и всё в неё скачивает.
 
-```
+
 cd Octopress
 git clone https://github.com/maximkoo/maximkoo.github.io.git _deploy
-```
+
 
 Тут он ещё что-то скачивает.
 
-```
+
 rake setup_githup_pages
 install bundler
 bundle install
-```
+
 
 Вроде это должно быть всё. Посты создаются, заливаются, однако - после всех экспериментов страницы генерируются пустые. Причины я так и не понял, возможно, дело в Active Python, и, возможно, стоило бы перезагрузиться.
 
