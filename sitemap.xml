@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://maximkoo.github.io/blog/2016/01/21/kak-ia-proviol-21-ianvaria-2016/</loc>
+    <lastmod>2016-01-21T13:14:42+03:00</lastmod>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/blog/2016/01/20/kak-ia-proviol-20-ianvaria-2016/</loc>
+    <lastmod>2016-01-20T12:08:18+03:00</lastmod>
+  </url>
+  <url>
     <loc>http://maximkoo.github.io/blog/2016/01/19/kak-ia-proviol-19-ianvaria-2016/</loc>
     <lastmod>2016-01-19T10:41:35+03:00</lastmod>
   </url>
@@ -9,12 +17,12 @@
     <lastmod>2016-01-18T10:23:30+03:00</lastmod>
   </url>
   <url>
-    <loc>http://maximkoo.github.io/blog/2016/01/18/kak-ia-proviol-16-ianvaria-2016/</loc>
-    <lastmod>2016-01-18T10:22:42+03:00</lastmod>
-  </url>
-  <url>
     <loc>http://maximkoo.github.io/blog/2016/01/17/kak-ia-proviol-17-ianvaria-2016/</loc>
     <lastmod>2016-01-17T10:23:19+03:00</lastmod>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/blog/2016/01/16/kak-ia-proviol-16-ianvaria-2016/</loc>
+    <lastmod>2016-01-16T10:22:42+03:00</lastmod>
   </url>
   <url>
     <loc>http://maximkoo.github.io/blog/2016/01/15/kak-ia-proviol-15-ianvaria-2016/</loc>
