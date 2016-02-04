@@ -174,6 +174,7 @@ task :today, :title do |t, args|
     post.puts "categories: "
     post.puts "---"
   end
+  system "notepad++ #{filename}"
 end
 
 
