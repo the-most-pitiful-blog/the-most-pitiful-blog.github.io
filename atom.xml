@@ -4,7 +4,7 @@
   <title><![CDATA[Здесь по-прежнему ничего не написано]]></title>
   <link href="http://maximkoo.github.io/atom.xml" rel="self"/>
   <link href="http://maximkoo.github.io/"/>
-  <updated>2016-03-12T11:28:15+03:00</updated>
+  <updated>2016-03-12T12:16:37+03:00</updated>
   <id>http://maximkoo.github.io/</id>
   <author>
     <name><![CDATA[maximkoo]]></name>
@@ -26,7 +26,7 @@
 
 <p>С девяти часов снова стал звонить этом застранцу-приставу, но он предусмотрительно не отвечал. Я быстренько сделал вчерашнюю задачку и принялся снова за Rails.</p>
 
-<p><a href="http://maximkoo.github.io/images/2016/IMG_20160311_171039-PANO.jpg"><img src="img%20center%20/images/2016/IMG_20160311_171039-PANO_800.jpg" alt="Alt Description" /></a></p>
+<p><a href="http://maximkoo.github.io/images/2016/IMG_20160311_171039-PANO.jpg"><img class="center" src="http://maximkoo.github.io/images/2016/IMG_20160311_171039-PANO_800.jpg"></a></p>
 
 <p><img class="center" src="http://maximkoo.github.io/images/2016/"></p>
 
