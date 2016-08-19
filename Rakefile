@@ -159,8 +159,18 @@ task :today, :title do |t, args|
 	when 11 then 'ноября'
 	when 12 then 'декабря'
 	end;
+	
+	ddd=case Time.now.strftime("%A") #18.08.2016
+	when 'Monday' then "Пн"
+	when 'Tuesday' then "Вт"
+	when 'Wednesday' then "Ср"
+	when 'Thursday' then "Чт"	
+	when 'Friday' then "Пт"
+	when 'Saturday' then "Сб"
+	when 'Sunday' then "Вс"
+	end;
 	filename=source_dir+'/'+posts_dir+'/'+Time.now.strftime('%Y-%m-%d')+'-kak-ia-proviol-'+Time.now.strftime('%d').to_i.to_s+'-'+s+'-'+Time.now.strftime('%Y')+'.'+"#{new_post_ext}";
-	title='Как я провёл '+Time.now.strftime('%d').to_i.to_s+' '+sr;
+	title='Как я провёл '+Time.now.strftime('%d').to_i.to_s+' '+sr+', '+ddd;
   if File.exist?(filename)
     abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
   end
