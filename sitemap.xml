@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://maximkoo.github.io/blog/2016/09/30/kak-ia-proviol-30-sientiabria-2016/</loc>
+    <lastmod>2016-09-30T11:50:11+04:00</lastmod>
+  </url>
+  <url>
     <loc>http://maximkoo.github.io/blog/2016/09/29/kak-ia-proviol-29-sientiabria-2016/</loc>
     <lastmod>2016-09-29T15:06:33+04:00</lastmod>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/blog/2016/09/28/kak-ia-proviol-28-sientiabria-2016/</loc>
+    <lastmod>2016-09-28T11:26:53+04:00</lastmod>
   </url>
   <url>
     <loc>http://maximkoo.github.io/blog/2016/09/27/kak-ia-proviol-27-sientiabria-2016/</loc>
@@ -2176,5 +2184,8 @@
   </url>
   <url>
     <loc>http://maximkoo.github.io/posts/50/</loc>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/posts/51/</loc>
   </url>
 </urlset>
