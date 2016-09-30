@@ -1,3 +1,6 @@
 [submodule ".themes/light"]
 	path = .themes/light
 	url = git://github.com/octothemes/classic-light.git
+[submodule ".themes/new-york"]
+	path = .themes/new-york
+	url = git://github.com/octothemes/new-york.git
