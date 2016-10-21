@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 group :development do
-  gem 'rake', '~> 10.0'
+  gem 'rake', '> 10.0'
   gem 'jekyll', '~> 2.0'
   gem 'octopress-hooks', '~> 2.2'
   gem 'octopress-date-format', '~> 2.0'
@@ -20,4 +20,5 @@ gem 'sinatra', '~> 1.4.2'
 
 group :jekyll_plugins do
   gem 'octopress-image-tag'
+  gem 'jekyll-paginate'
 end
