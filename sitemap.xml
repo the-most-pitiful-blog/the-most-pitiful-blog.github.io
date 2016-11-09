@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://maximkoo.github.io/blog/2016/11/09/kak-ia-proviol-9-noiabria-2016/</loc>
+    <lastmod>2016-11-09T10:46:51+03:00</lastmod>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/blog/2016/11/08/kak-ia-proviol-8-noiabria-2016/</loc>
+    <lastmod>2016-11-08T12:06:29+03:00</lastmod>
+  </url>
+  <url>
     <loc>http://maximkoo.github.io/blog/2016/11/07/kak-ia-proviol-7-noiabria-2016/</loc>
     <lastmod>2016-11-07T10:17:26+03:00</lastmod>
   </url>
@@ -2348,5 +2356,8 @@
   </url>
   <url>
     <loc>http://maximkoo.github.io/posts/54/</loc>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/posts/55/</loc>
   </url>
 </urlset>
