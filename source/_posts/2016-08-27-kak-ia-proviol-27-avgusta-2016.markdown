@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Как я провёл 27 августа, Вт"
+title: "Как я провёл 27 августа, Сб"
 date: 2016-08-27 11:53:12 +0400
 comments: true
 categories: 
