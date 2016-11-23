@@ -31,6 +31,6 @@ categories:
 
 {% img center /images/2016/IMG_2938_800.jpg %}
 
-{% img center /images/2016/IMG_2965_800.jpg 
+{% img center /images/2016/IMG_2965_800.jpg %}
 
 {% img center /images/2016/IMG_2974_800.jpg %}
