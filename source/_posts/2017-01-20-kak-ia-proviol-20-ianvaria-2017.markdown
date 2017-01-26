@@ -40,12 +40,12 @@ class C1
           self.class.class_eval do
                if args.first=~ /(.*)=/
                     define_method("#{args.first}") do
-                         puts %Q{Variable named "#{$1}" is set to #{args[1]}}
-                         instance_variable_set("@#{$1}", args[1])
+                        puts %Q{Variable named "#{$1}" is set to #{args[1]}}
+                        instance_variable_set("@#{$1}", args[1])
                     end;
                else
                     define_method("#{args.first}") do
-                         puts %Q{Variable named "#{args.first}" is equal to }+instance_variable_get("@#{args.first}").to_s
+                        puts %Q{Variable named "#{args.first}" is equal to }+instance_variable_get("@#{args.first}").to_s
 						 instance_variable_get("@#{args.first}")
                     end;
                end
