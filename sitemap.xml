@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://maximkoo.github.io/blog/2017/03/21/kak-ia-proviol-21-marta-2017/</loc>
+    <lastmod>2017-03-21T17:03:11+03:00</lastmod>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/blog/2017/03/20/kak-ia-proviol-20-marta-2017/</loc>
+    <lastmod>2017-03-20T15:08:51+03:00</lastmod>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/blog/2017/03/19/kak-ia-proviol-19-marta-2017/</loc>
+    <lastmod>2017-03-19T21:46:14+03:00</lastmod>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/blog/2017/03/18/kak-ia-proviol-18-marta-2017/</loc>
+    <lastmod>2017-03-18T20:15:19+03:00</lastmod>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/blog/2017/03/17/kak-ia-proviol-17-marta-2017/</loc>
+    <lastmod>2017-03-17T09:40:05+03:00</lastmod>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/blog/2017/03/16/kak-ia-proviol-16-marta-2017/</loc>
+    <lastmod>2017-03-16T14:49:00+03:00</lastmod>
+  </url>
+  <url>
     <loc>http://maximkoo.github.io/blog/2017/03/15/kak-ia-proviol-15-marta-2017/</loc>
     <lastmod>2017-03-15T11:07:55+03:00</lastmod>
   </url>
@@ -2899,5 +2923,8 @@
   </url>
   <url>
     <loc>http://maximkoo.github.io/posts/67/</loc>
+  </url>
+  <url>
+    <loc>http://maximkoo.github.io/posts/68/</loc>
   </url>
 </urlset>
