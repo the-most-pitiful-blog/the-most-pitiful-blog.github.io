@@ -9,7 +9,8 @@
   <meta name="author" content="maximkoo">
 
   
-  <meta name="description" content="В обед вышел проветриться в парк, там проходит какая-то акция - всем, кто проходит через мостик, дают банку какого-то напитка &ldquo;Несквик&rdquo;& &hellip;">
+  <meta name="description" content="Вернувшись из отпуска, я немедленно сделал то, что надо было сделать до отпуска. 1) я установил себе exiftool 1
+sudo apt-get install libimage- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +73,112 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2015/07/16/kak-ia-umien'shaiu-fotoghrafii/">Как я уменьшаю фотографии</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-16T15:03:14+04:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Вернувшись из отпуска, я немедленно сделал то, что надо было сделать до отпуска.</p>
+
+<p>1) я установил себе <strong>exiftool</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libimage-exiftool-perl</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Теперь я могу с лёгкостью выдернуть из любого RAW-файла встроенный jpeg.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>exiftool -b -PreviewImage -w _embedded.jpg IMG_9277.CR2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>То же самое в Убунту можно проделать с помощью программки Shotwell, но получается отчень медленно, к тому же программка глючит.</p>
+
+<p>Ещё можно было бы поставить на фотоаппарате съёмку в RAW и JPEG одновременно, но это слишком просто.  <a href="http://www.sno.phy.queensu.ca/~phil/exiftool/exiftool_pod.html">Полный перечень команд exiftool</a>.</p>
+
+<p>2) я установил гем <strong>FastImage Resize</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install fastimage_resize</span></code></pre></td></tr></table></div></figure>
+
+
+<p>C помощью него можно определить и изменить размеры изображения. Для работы он использует libgd (какая-то графическая библиотека вроде), так что я ещё проделал:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libgd2
+</span><span class='line'>sudo apt-get install libgd2-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>И немедленно написал программку для пожатия:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#rsz.rb</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;fastimage_resize&#39;</span>
+</span><span class='line'><span class="n">maxSize</span><span class="o">=</span><span class="mi">600</span>
+</span><span class='line'><span class="no">ARGV</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="nb">print</span> <span class="s2">&quot;Processing &quot;</span><span class="o">+</span><span class="n">x</span><span class="o">+</span><span class="s1">&#39; ...&#39;</span>
+</span><span class='line'><span class="n">dims</span><span class="o">=</span><span class="no">FastImage</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">pwd</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">x</span><span class="p">)</span>
+</span><span class='line'><span class="no">FastImage</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="no">Dir</span><span class="o">.</span><span class="n">pwd</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">x</span><span class="p">,</span>
+</span><span class='line'>                 <span class="k">if</span> <span class="n">dims</span><span class="o">.</span><span class="n">first</span><span class="o">==</span><span class="n">dims</span><span class="o">.</span><span class="n">max</span> <span class="k">then</span> <span class="n">maxSize</span><span class="o">.</span><span class="n">to_i</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">,</span>
+</span><span class='line'>                 <span class="k">if</span> <span class="n">dims</span><span class="o">.</span><span class="n">first</span><span class="o">==</span><span class="n">dims</span><span class="o">.</span><span class="n">max</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">maxSize</span><span class="o">.</span><span class="n">to_i</span> <span class="k">end</span><span class="p">,</span>
+</span><span class='line'>               <span class="ss">:outfile</span><span class="o">=&gt;</span><span class="s2">&quot;/home/maximko/Octopress/source/images/2015/&quot;</span><span class="o">+</span><span class="n">x</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="o">+</span><span class="n">maxSize</span><span class="o">.</span><span class="n">to_s</span><span class="o">+</span><span class="s2">&quot;.&quot;</span><span class="p">))</span>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Finished&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">rsz</span><span class="o">.</span><span class="n">rb</span> <span class="no">IMG_20150710_144025</span><span class="o">.</span><span class="n">jpg</span> <span class="no">IMG_20150712_112742</span><span class="o">.</span><span class="n">jpg</span> <span class="no">IMG_20150714_125123</span><span class="o">.</span><span class="n">jpg</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Если в имени файла встречаются нелепые символы, например, скобки, то имя файла надо брать в кавычки. Пожимает нормально, насколько я могу судить, разница с XnView не выявлена. Кроме :outfile можно ещё указать :jpeg_quality.</p>
+
+<p>В Турции мне всё это пришлось бы очень кстати, я потратил немало времени на конвертацию и пожатие своих умильных фоточек. Что же, нет повода переживать, если мы когда-нибудь ещё куда-нибудь поедем, мне всё это непременно пригодится.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2015/07/14/kak-ia-proviol-chietyrnadtsatoie-iiulia/">Как я провёл четырнадцатое июля</a></h1>
     
     
@@ -88,7 +195,7 @@
   
 
 
-<time datetime="2015-07-14T16:41:59+03:00" pubdate data-updated="true"></time>
+<time datetime="2015-07-14T17:41:59+04:00" pubdate data-updated="true"></time>
         
       </p>
     
@@ -136,7 +243,7 @@
   
 
 
-<time datetime="2015-07-13T19:57:04+03:00" pubdate data-updated="true"></time>
+<time datetime="2015-07-13T20:57:04+04:00" pubdate data-updated="true"></time>
         
       </p>
     
@@ -186,7 +293,7 @@
   
 
 
-<time datetime="2015-07-12T21:56:21+03:00" pubdate data-updated="true"></time>
+<time datetime="2015-07-12T22:56:21+04:00" pubdate data-updated="true"></time>
         
       </p>
     
@@ -238,7 +345,7 @@
   
 
 
-<time datetime="2015-07-11T00:01:57+03:00" pubdate data-updated="true"></time>
+<time datetime="2015-07-11T01:01:57+04:00" pubdate data-updated="true"></time>
         
       </p>
     
@@ -300,7 +407,7 @@
   
 
 
-<time datetime="2015-07-10T11:04:46+03:00" pubdate data-updated="true"></time>
+<time datetime="2015-07-10T12:04:46+04:00" pubdate data-updated="true"></time>
         
       </p>
     
@@ -370,7 +477,7 @@
   
 
 
-<time datetime="2015-07-09T22:15:49+03:00" pubdate data-updated="true"></time>
+<time datetime="2015-07-09T23:15:49+04:00" pubdate data-updated="true"></time>
         
       </p>
     
@@ -450,7 +557,7 @@
   
 
 
-<time datetime="2015-07-08T08:14:40+03:00" pubdate data-updated="true"></time>
+<time datetime="2015-07-08T09:14:40+04:00" pubdate data-updated="true"></time>
         
       </p>
     
@@ -504,7 +611,7 @@
   
 
 
-<time datetime="2015-07-07T14:51:24+03:00" pubdate data-updated="true"></time>
+<time datetime="2015-07-07T15:51:24+04:00" pubdate data-updated="true"></time>
         
       </p>
     
@@ -566,7 +673,7 @@
   
 
 
-<time datetime="2015-07-05T09:02:50+03:00" pubdate data-updated="true"></time>
+<time datetime="2015-07-05T10:02:50+04:00" pubdate data-updated="true"></time>
         
       </p>
     
@@ -613,63 +720,13 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/07/04/kak-ia-proviol-chietviortoie-iiulia/">Как я провёл четвёртое июля</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-07-04T15:54:57+03:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Игорёк играл с мальчиком по имени Матвей, у него очень удачно оказались машинки - бульдозер, грузовик и трактор.</p>
-
-<p>Поля всё жаловалась, что ей скучно - вот дети пошли, на доре им скучно. Я в детстве радовался уже тому, что я на море, особенно если там волны. Современным детям всё очень легко достаётся. Море прямо в двух шагах, потому и не интересно. Вот мне, например, в Калининграде надо было сначала ехать на трамвае на вокзал, там садиться на электричку, ехать в Зеленоградск или Светлогорск, а там ещё идти от моря до электрички пешком. И я всегда радовался, попав на море!</p>
-
-<p>В конце концов мы с Полей пошли в магазин, купить ей маску и трубку, но дурацкий магазин оказался почему-то закрыт. На обратном пути зашли посмотреть ящериц около детской площадки. Ящерицы утром, когда никого нет, вылезают прямо на площадку. Но подойти к ним можно в самом удачном случае метра на три. Мы видели двух ящериц сразу, я сделал несколько кадров, но издали.</p>
-
-<p>Потом Поля на пляже познакомилась с какой-то девочкой, ей пятнадцать лет. Она нам рассказала, что у них в Москве частный дом с бассейном. Возможно, это очень перспективное знакомство. Эта девочка отдыхает в отеле уже целый месяц и завтра уезжает.</p>
-
-<p>Народу в отель привалило очень сильно. Скажем прямо, народу стало больше раза в три или четыре.</p>
-
-<p>В пять часов Юля поехала в Аланию на шопинг, тут ходят бесплатные автобус. Как раз в это время проснулся малыш и начал пищать. Мы все пошли к маленькому детскому бассейну, но малыш всё равно пищал очень громко и не переставая. В общем, он пищал целый час, пока Поля не принесла ему круг. Тут он постепенно забыл про маму и стал плавать на круге и кататься с горки. Малыш очень аккуратный - залезая на горку, он прислоняет к ней сбоку круг и никому не разрешает его переставлять. Потом мы перешли в большой бассейн, где лестница со ступеньками. Там очень удобное место, малыш достаёт ногами до верхней ступеньки, к тому же там тень.</p>
-
-<p>Ближе к семи часам пошли на ужин. Народу в ресторане столько, что тяжело даже пройти. Все места снаружи заняты. Мы с большим трудом нашли место внутри в самом конце. Места неудобные, потому что очень далеко идти за едой, к еде приходится проталкиваться. Зато там лучше сервированы столы - у каждого два ножа и две вилки, тканевая салфетка и бокал с ножкой. Я взял рис с помидорами + ещё тарелку цветной капусты с кукурузой. Странно, Поля тоже взяла себе рис и помидоры, но пока ходила взад-вперёд, съела все помидоры. Я ещё сумел сделать для малыша красный чай. Дети кое-как поели, я за ними всё доел и мы поспешили на детскую площадку. Потом там показывали мультфильм &ldquo;Ледниковый период 2&rdquo;. Мультфильмы показываются без затей на русском языке.</p>
-
-<p>Юля вернулась около девяти, было уже темно. Мы ещё попили кофе в ресторане перед самым закрытием.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
-      <a class="prev" href="63">&larr; Older</a>
+      <a class="prev" href="/posts/63">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
-    <a class="next" href="61">Newer &rarr;</a>
+    <a class="next" href="/posts/61">Newer &rarr;</a>
     
   </div>
 </div>
@@ -678,6 +735,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/03/27/kak-ia-proviol-27-marta-2017/">Как я провёл 27 марта, Пн</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2017/03/26/kak-ia-proviol-26-marta-2017/">Как я провёл 26 марта, Вс</a>
@@ -793,10 +854,6 @@
     
       <li class="post">
         <a href="/blog/2017/02/26/kak-ia-proviol-26-fievralia-2017/">Как я провёл 26 февраля, Вс</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/25/kak-ia-proviol-25-fievralia-2017/">Как я провёл 25 февраля, Сб</a>
       </li>
     
   </ul>
