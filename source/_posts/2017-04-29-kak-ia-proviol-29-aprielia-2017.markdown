@@ -5,3 +5,8 @@ date: 2017-04-30 21:08:28 +0300
 comments: true
 categories: 
 ---
+{% img center /images/2017/IMG_6345_800.jpg %}
+
+Вот так гораздо эффектнее 
+
+{% img center /images/2017/IMG_6344_800.jpg %}
