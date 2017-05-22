@@ -174,7 +174,7 @@ task :today, :param do |t, args|
   #  title = get_stdin("Enter a title for your post: ")
   #end
   cDate=Time.now;
-  puts "XXXXXX="<<args.param
+  #puts "XXXXXX="<<args.param
   if args.param && args.to_i!=0 
     cDate=Time.now+args.param.to_i*24*60*60;
   end;  
