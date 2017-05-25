@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Как я провёл 12 мая, Пт"
-date: 2017-05-12 12:28:08 +0400
+title: "Как я провёл 11 мая, Чт"
+date: 2017-05-11 12:28:08 +0400
 comments: true
 categories: 
 ---
