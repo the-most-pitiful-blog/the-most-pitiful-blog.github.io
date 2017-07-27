@@ -52,6 +52,16 @@ end
 # Working with Jekyll #
 #######################
 
+desc "Add, commit and push" 
+task :push do
+puts "Trying to add..."
+system "git add ."
+puts "Trying to commit..."
+system 'git commit -m "Trying to commit through rake task"'
+puts "Trying to push..."
+system "git push origin source"
+end;
+
 desc "Generate jekyll site"
 task :generate do
   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
