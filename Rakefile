@@ -53,11 +53,11 @@ end
 #######################
 
 desc "Add, commit and push" 
-task :push do
+task :quick_push do
 puts "Trying to add..."
 system "git add ."
 puts "Trying to commit..."
-system 'git commit -m "Trying to commit through rake task"'
+system 'git commit -m "Commit through rake task: #{Time.now.strftime(''%d.%m.%Y'')}"'
 puts "Trying to push..."
 system "git push origin source"
 end;
