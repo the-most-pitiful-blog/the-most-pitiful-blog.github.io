@@ -57,7 +57,8 @@ task :quick_push do
 puts "Trying to add..."
 system "git add ."
 puts "Trying to commit..."
-system 'git commit -m "Commit through rake task: #{Time.now.strftime(''%d.%m.%Y'')}"'
+quick_comment="Commit through rake task: #{Time.now.strftime('%d.%m.%Y')}"
+system ("git commit -m \"#{quick_comment}\" ")
 puts "Trying to push..."
 system "git push origin source"
 end;
