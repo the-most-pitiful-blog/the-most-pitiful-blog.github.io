@@ -1,4 +1,5 @@
-Layout: post
+---
+layout: post
 title: "Как я провёл 5 сентября, Вт"
 date: 2017-09-05 16:55:26 +0300
 comments: true
