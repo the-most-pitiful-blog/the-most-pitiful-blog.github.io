@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Как я провёл 20 января, Пт - Здесь по-прежнему ничего не написано</title>
+  <meta name="author" content="maximkoo">
+
+  
+  <meta name="description" content="Будильник зазвонил в шесть, я решил мужественно полежать ещё пять минут и, когда я все же встал, на часах было 7-05. Пришлось срочно поднимать Полю и &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://maximkoo.github.io/blog/2017/01/20/kak-ia-proviol-20-ianvaria-2017/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Здесь по-прежнему ничего не написано" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+	<div align="center">
+  <h1><a href="/">Здесь по-прежнему ничего не написано</a></h1>
+  
+    <h2><i>Самый унылый бложик на свете</i></h2>
+  
+</div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:maximkoo.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Как я провёл 20 января, Пт</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-01-20T09:52:21+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Будильник зазвонил в шесть, я решил мужественно полежать ещё пять минут и, когда я все же встал, на часах было 7-05. Пришлось срочно поднимать Полю и готовить бутеры и БК. К тому времени, как Поля уже оделась, малыш ещё спал, так что мы потащились в путь вдвоем. С собой я взял сыр для продажи на работе + некоторое его количество для презентации.</p>
+
+<p>На работе провел мощную рекламную акцию с раздачей образцов - и тут же сбыл два принесенных кубика. На самом деле, заказов сразу поступило много, досадно, что я сразу не принёс весь сыр, сразу бы его и продали бы.</p>
+
+<p>На работе опять взялся за Руби, еще раз все тщательно обдумал - и решил вчерашнюю задачу, то есть самостоятельно написал перехват и обработку несуществующих методов, не подглядывая в готовые решения.</p>
+
+<figure class='code'><figcaption><span>Динамическая имитация работы несуществующих методов через method_missing</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">C1</span>
+</span><span class='line'>     <span class="k">def</span> <span class="nf">method_missing</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>          <span class="nb">self</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span>
+</span><span class='line'>               <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">first</span><span class="o">=~</span> <span class="sr">/(.*)=/</span>
+</span><span class='line'>                    <span class="nb">puts</span> <span class="s2">&quot;@</span><span class="si">#{</span><span class="n">args</span><span class="o">.</span><span class="n">first</span><span class="si">}</span><span class="s2"> is set to </span><span class="si">#{</span><span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>                    <span class="nb">instance_variable_set</span><span class="p">(</span><span class="s2">&quot;@</span><span class="si">#{</span><span class="vg">$1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">);</span>
+</span><span class='line'>               <span class="k">else</span>
+</span><span class='line'>                    <span class="nb">instance_variable_get</span><span class="p">(</span><span class="s2">&quot;@</span><span class="si">#{</span><span class="n">args</span><span class="o">.</span><span class="n">first</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>               <span class="k">end</span>
+</span><span class='line'>          <span class="k">end</span><span class="p">;</span>
+</span><span class='line'>     <span class="k">end</span><span class="p">;</span>
+</span><span class='line'><span class="k">end</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span><span class="o">=</span><span class="no">C1</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">trololo</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+</span><span class='line'><span class="nb">puts</span> <span class="n">a</span><span class="o">.</span><span class="n">trololo</span><span class="p">;</span> <span class="c1">#=&gt; 5</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">trololo</span><span class="o">=</span><span class="mi">20</span><span class="p">;</span>
+</span><span class='line'><span class="nb">puts</span> <span class="n">a</span><span class="o">.</span><span class="n">trololo</span><span class="p">;</span> <span class="c1">#=&gt; 20</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="no">C1</span><span class="o">.</span><span class="n">instance_variables</span> <span class="c1">#=&gt; @trololo</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Динамическое создание ранее не существовавших методов при обращении к ним</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">C1</span>
+</span><span class='line'>     <span class="k">def</span> <span class="nf">method_missing</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>          <span class="nb">self</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span>
+</span><span class='line'>               <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">first</span><span class="o">=~</span> <span class="sr">/(.*)=/</span>
+</span><span class='line'>                    <span class="n">define_method</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">args</span><span class="o">.</span><span class="n">first</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>                        <span class="nb">puts</span> <span class="sx">%Q{Variable named &quot;</span><span class="si">#{</span><span class="vg">$1</span><span class="si">}</span><span class="sx">&quot; is set to </span><span class="si">#{</span><span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="si">}</span><span class="sx">}</span>
+</span><span class='line'>                        <span class="nb">instance_variable_set</span><span class="p">(</span><span class="s2">&quot;@</span><span class="si">#{</span><span class="vg">$1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>                    <span class="k">end</span><span class="p">;</span>
+</span><span class='line'>               <span class="k">else</span>
+</span><span class='line'>                    <span class="n">define_method</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">args</span><span class="o">.</span><span class="n">first</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>                        <span class="nb">puts</span> <span class="sx">%Q{Variable named &quot;</span><span class="si">#{</span><span class="n">args</span><span class="o">.</span><span class="n">first</span><span class="si">}</span><span class="sx">&quot; is equal to }</span><span class="o">+</span><span class="nb">instance_variable_get</span><span class="p">(</span><span class="s2">&quot;@</span><span class="si">#{</span><span class="n">args</span><span class="o">.</span><span class="n">first</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_s</span>
+</span><span class='line'>                       <span class="nb">instance_variable_get</span><span class="p">(</span><span class="s2">&quot;@</span><span class="si">#{</span><span class="n">args</span><span class="o">.</span><span class="n">first</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>                    <span class="k">end</span><span class="p">;</span>
+</span><span class='line'>               <span class="k">end</span>
+</span><span class='line'>          <span class="k">end</span>
+</span><span class='line'>     <span class="nb">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">first</span><span class="p">)</span>
+</span><span class='line'>     <span class="k">end</span><span class="p">;</span>
+</span><span class='line'><span class="k">end</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span><span class="o">=</span><span class="no">C1</span><span class="o">.</span><span class="n">new</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">trololo</span><span class="o">=</span><span class="mi">5</span>
+</span><span class='line'><span class="nb">puts</span> <span class="n">a</span><span class="o">.</span><span class="n">trololo</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;-- Instance methods of C1 --&quot;</span>
+</span><span class='line'><span class="nb">puts</span> <span class="no">C1</span><span class="o">.</span><span class="n">instance_methods</span><span class="o">.</span><span class="n">grep</span> <span class="sr">/ololo/</span> <span class="c1">#=&gt; trololo=, trololo</span>
+</span><span class='line'><span class="nb">puts</span> <span class="n">a</span><span class="o">.</span><span class="n">instance_variables</span><span class="o">.</span><span class="n">grep</span> <span class="sr">/ololo/</span> <span class="c1">#=&gt; @trololo</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Вот так вот, если что-то долго пилить, оно перепилится, ну, кроме Джавы, конечно.</p>
+
+<p>В обед потащился в зал, жал 120, выжал два раза, второй раз едва-едва, но все же выжал сам, чуть утренняя булочка обратно не вылезла. Дальше жал 100*3*6, выжал легко, надо поднимать планку, я прямо вижу, как запросто жму сотню три по восемь.</p>
+
+<p>В раздевалке поговорил с Грищенко, он сказал, что собирается поехать в Испанию, причем они забронировали апартаменты, типа это дешевле. От аэропорта до Барселоны и дальше до места там якобы легко добраться на электричке. Возможно, это мысль нам на лето.</p>
+
+<p>После обеда обработал ещё десяток фоточек из Калининграда, я уже принялся за предпоследний день, хотя уже вообще давно пора было с этим закончить, скоро пройдёт полгода с нашей поездки.</p>
+
+<p>Потом занялся Яндекс-диском, который совершенно переполнился. Надо аккуратненько удалить оттуда 2015 год, а заодно и с рабочего компа - предварительно убедившись, что все картинки точно перенесены на внешние диски на работе и дома. Тут получился провал, потому что на рабочем компе, яндекс-диске и внешнем диске все вразнобой, и если на внешний кирпич скопировать проблем нет, то на переполненный Яндекс-диск особо ничего не скопируешь. Так что придётся рубить хвост по частям, и синхронизировать ЯД с домашним диском в несколько приемов.</p>
+
+<p>Надо было освободить сколько-то места на ЯД и заодно скинуть туда все, что по небрежности скинуто ещё не было, а затем перенести на домашний комп по FTP, пора уже навести в этом деле порядок, пользуясь современными технологиями. Я стал перебрасывать Катины фоточки из Крыма с ЯД на внешний диск, и параллельно что-то с него закачивал на ЯД, но почему-то запись прервалась, я предположил, что вдруг включился Device Lock, который уже не раз отравлял мне жизнь, переподключил внешний диск к ноуту - но и там он почему-то не заработал, буква в списке появилась, но содержимое не читается. И тут я понял, что дело плохо - диск рухнул, и вместе с ним рухнул фотоархив, видеоархив, архив RAW-файлов, и фоточки из Калининграда так и останутся навсегда необработанными. Ещё несколько минут назад я их видел на экране, но больше, по-видимому, никогда не увижу, и те, что я обработал сегодня, спасло лишь чудо в последний момент.</p>
+
+<p>К этому времени настала пора ехать домой, так что потащился к метро, несколько расстроенный и озадаченный. Что же теперь, придётся обращаться в службу &ldquo;восстановления данных&rdquo;? Наверняка там оплата помегабайтно и выйдет очень дорого за 2ТБ.</p>
+
+<p>Машину на Сходненской я, к счастью, поставил так, что загородить меня было нельзя. На мосту через МКАД стоял длинный хвост, так что я съехал на МКАД. Это, без сомнения, было самым глупым решением из всех возможных, потому что вся эстакада была забита, и перед разворотом тоже стоял хвост. Встал без затей на тротуаре, не доезжая помойки.</p>
+
+<p>Дома были родители, отец приготовил нам суп харчо, так что я поел с аппетитом. Юли ещё не было, потому что она застряла в магазе на Планерной - не просто так, Юля выбирала подарок для Эмилии. Когда Юля пришла, она принесла не только сумочку для Эмилии, но ещё и резиновые сапоги себе на участок и ещё новое платье для Поли и ещё какую-то майку или кофточку.</p>
+
+<p>Потом родители поехали домой, а мы с Юлей выпили по стаканчику портвейна, на этот раз &ldquo;Белый Сурож&rdquo;, как мне показалось, он лучше, чем прошлый, тот вроде назывался &ldquo;Алушта&rdquo;, какой-то он тяжелый на вкус. А лучше всех был &ldquo;Южнобережный&rdquo;, но что-то он не попадается.</p>
+
+<p>Я уже так устал за неделю, что дома почти ничего не делал, я вообще решил, что мне ничего не надо. Дети меня все равно не слушают, часам к десяти я пошёл и леш в кровать. У меня уже даже не осталось сил смотреть планшет, так что вскоре я уснул.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">maximkoo</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-01-20T09:52:21+03:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2017/01/19/kak-ia-proviol-19-ianvaria-2017/" title="Previous Post: Как я провёл 19 января, Чт">&laquo; Как я провёл 19 января, Чт</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2017/01/21/kak-ia-proviol-21-ianvaria-2017/" title="Next Post: Как я провёл 21 января, Сб">Как я провёл 21 января, Сб &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/12/15/kak-ia-proviol-15-diekabria-2017/">Как я провёл 15 декабря, Пт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/14/kak-ia-proviol-14-diekabria-2017/">Как я провёл 14 декабря, Чт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/13/kak-ia-proviol-13-diekabria-2017/">Как я провёл 13 декабря, Ср</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/12/kak-ia-proviol-12-diekabria-2017/">Как я провёл 12 декабря, Вт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/11/kak-ia-proviol-11-diekabria-2017/">Как я провёл 11 декабря, Пн</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/10/kak-ia-proviol-10-diekabria-2017/">Как я провёл 10 декабря, Вс</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/09/kak-ia-proviol-9-diekabria-2017/">Как я провёл 9 декабря, Сб</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/08/kak-ia-proviol-8-diekabria-2017/">Как я провёл 8 декабря, Пт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/07/kak-ia-proviol-7-diekabria-2017/">Как я провёл 7 декабря, Чт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/06/kak-ia-proviol-6-diekabria-2017/">Как я провёл 6 декабря, Ср</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/05/kak-ia-proviol-5-diekabria-2017/">Как я провёл 5 декабря, Вт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/04/kak-ia-proviol-4-diekabria-2017/">Как я провёл 4 декабря, Пн</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/03/kak-ia-proviol-3-diekabria-2017/">Как я провёл 3 декабря, Вс</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/02/kak-ia-proviol-2-diekabria-2017/">Как я провёл 2 декабря, Сб</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/01/kak-ia-proviol-1-diekabria-2017/">Как я провёл 1 декабря, Пт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/30/kak-ia-proviol-30-noiabria-2017/">Как я провёл 30 ноября, Чт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/29/kak-ia-proviol-29-noiabria-2017/">Как я провёл 29 ноября, Ср</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/28/kak-ia-proviol-28-noiabria-2017/">Как я провёл 28 ноября, Вт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/27/kak-ia-proviol-27-noiabria-2017/">Как я провёл 27 ноября, Пн</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/26/kak-ia-proviol-26-noiabria-2017/">Как я провёл 26 ноября, Вс</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/25/kak-ia-proviol-25-noiabria-2017/">Как я провёл 25 ноября, Сб</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/24/kak-ia-proviol-24-noiabria-2017/">Как я провёл 24 ноября, Пт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/23/kak-ia-proviol-23-noiabria-2017/">Как я провёл 23 ноября, Чт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/22/kak-ia-proviol-22-noiabria-2017/">Как я провёл 22 ноября, Ср</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/21/kak-ia-proviol-21-noiabria-2017/">Как я провёл 21 ноября, Вт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/20/kak-ia-proviol-20-noiabria-2017/">Как я провёл 20 ноября, Пн</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/19/kak-ia-proviol-19-noiabria-2017/">Как я провёл 19 ноября, Вс</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/18/kak-ia-proviol-18-noiabria-2017/">Как я провёл 18 ноября, Сб</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/17/kak-ia-proviol-17-noiabria-2017/">Как я провёл 17 ноября, Пт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/16/kak-ia-proviol-16-noiabria-2017/">Как я провёл 16 ноября, Чт</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2017 - maximkoo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a>. Background image by <a href="http://www.flickr.com/photos/89433098@N04/">Florian Kraft Fotografie</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

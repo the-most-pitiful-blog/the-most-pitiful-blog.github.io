@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://maximkoo.github.io/sitemap.xml 

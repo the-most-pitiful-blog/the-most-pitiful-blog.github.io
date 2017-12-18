@@ -1,0 +1,851 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Здесь по-прежнему ничего не написано</title>
+  <meta name="author" content="maximkoo">
+
+  
+  <meta name="description" content="В общем, проблема переноса фотоархива с работы домой так окончательного решения и не находила. GoodSync отказался работать после истечения триального &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://maximkoo.github.io/posts/90/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Здесь по-прежнему ничего не написано" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+	<div align="center">
+  <h1><a href="/">Здесь по-прежнему ничего не написано</a></h1>
+  
+    <h2><i>Самый унылый бложик на свете</i></h2>
+  
+</div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:maximkoo.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/23/kak-ia-pierienios-fotoarkhiv-s-raboty-domoi/">Как я перенёс фотоархив с работы домой</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-23T16:19:10+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>В общем, проблема переноса фотоархива с работы домой так окончательного решения и не находила. GoodSync отказался работать после истечения триального периода, я только зря потратил время на изучение.</p>
+
+<p>С некоторым усилием я развернул дома FTP-cервер, примечательно, что я использовал сервер, встроенный в Windows 7. С нетбука под Убунту на работе через офисный wifi я смог приконнектиться и даже скопировать файлик командой cp. Но мне надо было копировать много файлов и папок. Из рассмотренных программ:</p>
+
+<ul>
+<li>gFTP работает нормально, но спотыкается об уже существующие файлы и папки</li>
+<li>Double Commander неправильно отображает имена папок на удалённой стороне,и самое главное, после потери соединения не может переподключиться и его приходится перезапускать, а запускается он только из командной строки, в меню он не добавился.</li>
+<li>Midnight Commander вообще не работает, или я чего-то не понял. На вид полное убожество, разбираться желания не возникло.</li>
+</ul>
+
+
+<p>В общем, я прикинул так и этак, и сам написал программку для копировния на Ruby. Собственно, это первый осмысленный код, что я написал на Руби. Программка умеет копировать файлы по FTP, перебирая вложенные папки и копируя их структуру. Уже существующие файлы и папки пропускаются (достаточно совпадения имени).</p>
+
+<p>в файле <strong>copy_ftp_f.rb</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;net/ftp&#39;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">FTPConn</span> <span class="o">&lt;</span> <span class="no">Net</span><span class="o">::</span><span class="no">FTP</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>      <span class="vi">@ftpc</span><span class="o">=</span><span class="no">Net</span><span class="o">::</span><span class="no">FTP</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;xxx.xxx.xxx.xxx&#39;</span><span class="p">)</span> <span class="c1">#IP-адрес</span>
+</span><span class='line'>      <span class="vi">@ftpc</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">ftpConn</span>
+</span><span class='line'>      <span class="vi">@ftpc</span>
+</span><span class='line'>  <span class="k">end</span>  
+</span><span class='line'>  <span class="k">def</span> <span class="nf">closeFtpConn</span>
+</span><span class='line'>      <span class="vi">@ftpc</span><span class="o">.</span><span class="n">close</span>
+</span><span class='line'>  <span class="k">end</span>  
+</span><span class='line'><span class="k">end</span>    
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">CopyFTP</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">pftp</span><span class="p">,</span> <span class="n">pfrom</span><span class="p">,</span> <span class="n">pto</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@s1</span><span class="p">,</span><span class="vi">@s2</span><span class="o">=</span><span class="n">pfrom</span><span class="p">,</span><span class="n">pto</span>
+</span><span class='line'>      <span class="c1">#puts &#39;@s1=&#39;+@s1</span>
+</span><span class='line'>      <span class="c1">#puts &#39;@s2=&#39;+@s2</span>
+</span><span class='line'>      <span class="c1">#puts &#39;@s2(Basename)=&#39;+File.basename(@s2)</span>
+</span><span class='line'>      <span class="vi">@ftp</span><span class="o">=</span><span class="n">pftp</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">copyFolder</span>
+</span><span class='line'>      <span class="c1">#puts @ftp.nlst()</span>
+</span><span class='line'>      <span class="vi">@fi</span><span class="o">=</span><span class="vi">@ftp</span><span class="o">.</span><span class="n">nlst</span><span class="p">()</span>
+</span><span class='line'>      <span class="k">if</span> <span class="vi">@fi</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="s1">&#39;FTP: trying to enter directory &#39;</span><span class="o">+</span><span class="vi">@s2</span>
+</span><span class='line'>          <span class="n">fff</span><span class="o">=</span><span class="vi">@ftp</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="s1">&#39;Directory &#39;</span><span class="o">+</span><span class="vi">@s2</span><span class="o">+</span> <span class="s1">&#39; exists.&#39;</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>          <span class="vi">@ftp</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="s1">&#39;Directory &#39;</span><span class="o">+</span><span class="vi">@s2</span><span class="o">+</span> <span class="s1">&#39; created.&#39;</span>
+</span><span class='line'>          <span class="vi">@ftp</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vi">@s2</span><span class="p">))</span>
+</span><span class='line'>      <span class="k">end</span>  
+</span><span class='line'>      
+</span><span class='line'>      <span class="vi">@fi</span><span class="o">=</span><span class="vi">@ftp</span><span class="o">.</span><span class="n">nlst</span><span class="p">()</span>
+</span><span class='line'>      <span class="c1">#puts @fi</span>
+</span><span class='line'>      <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="vi">@s1</span><span class="o">+</span><span class="s1">&#39;/*&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
+</span><span class='line'>          <span class="k">if</span> <span class="no">File</span><span class="o">.</span><span class="n">file?</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span class='line'>              <span class="nb">print</span> <span class="s1">&#39;Copy file &#39;</span><span class="o">+</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;...&#39;</span>
+</span><span class='line'>              <span class="k">if</span> <span class="ow">not</span> <span class="vi">@fi</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span><span class='line'>                  <span class="vi">@ftp</span><span class="o">.</span><span class="n">putbinaryfile</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span class='line'>                  <span class="nb">puts</span> <span class="s1">&#39;copied&#39;</span>
+</span><span class='line'>              <span class="k">else</span>
+</span><span class='line'>                  <span class="nb">puts</span> <span class="s1">&#39;already exists!&#39;</span>
+</span><span class='line'>              <span class="k">end</span>
+</span><span class='line'>          <span class="k">else</span>
+</span><span class='line'>              <span class="nb">puts</span> <span class="s1">&#39;Entering directory &#39;</span><span class="o">+</span><span class="n">x</span>
+</span><span class='line'>              <span class="n">z</span><span class="o">=</span><span class="no">CopyFTP</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="vi">@ftp</span><span class="p">,</span> <span class="vi">@s1</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="vi">@s2</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span><span class='line'>              <span class="n">z</span><span class="o">.</span><span class="n">copyFolder</span>
+</span><span class='line'>          <span class="k">end</span>  
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="vi">@ftp</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>  
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>в файле <strong>copy_home.rb</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;./copy_ftp_f.rb&#39;</span>
+</span><span class='line'><span class="n">f</span><span class="o">=</span><span class="no">FTPConn</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">fc</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">ftpConn</span>
+</span><span class='line'><span class="nb">p</span><span class="o">=</span><span class="no">CopyFTP</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span><span class="no">ARGV</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'><span class="nb">p</span><span class="o">.</span><span class="n">copyFolder</span>
+</span><span class='line'><span class="n">f</span><span class="o">.</span><span class="n">closeFtpConn</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Для запуска из командной строки</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">copy_home</span><span class="o">.</span><span class="n">rb</span> <span class="sr">/home/m</span><span class="n">aximko</span><span class="o">/</span><span class="n">from_folder</span> <span class="n">to_folder</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Работает нормально.</p>
+
+<p>Как я начинаю понимать, если под Линуксом хочешь пользоваться нормальным софтом - пиши его сам! Тут вам не винда, где всё работает с самого начала, тут вам свобода, то есть ничего готового нет.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/23/kak-ia-proviol-dvadtsat'-triet'ie-iiunia/">Как я провёл двадцать третье июня</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-23T16:17:32+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>После работы опять заехал в МФЦ, сдать документы на новый паспорт в УФМС. Обслуживание в МФЦ по-прежнему на высшем уровне, никаких очередей. Девушка в погонах предъявила мне обвинение в административном правонарушении и вынесла предупреждение, то есть штраф я не получил. Старый паспорт у меня забрали. Как-то мне с ним в целом не повезло, но, другой стороны, он мне прослужил так или иначе, двенадцать с половиной лет. Второго июля мне должны сделать новый паспорт и эти дурацкие проблемы с нотариусами уйдут в прошлое.</p>
+
+<p>Потом заехал домой, взял рабочую одежду и виноград. Пора его уже посадить, в конце концов, это мой подарок на ДР и стоит он 2000 рублей. Подобрал Юлю на Планерной и поехали на участок. Юля купила в дорогу две самсы с мясом. Доехали хорошо, но что-то мне показалось  долго. Всё же по новой дороге выходит 50 км, не так уж и мало.</p>
+
+<p>На участке посадили виноград, Юля начала поливать привезённой водой. У меня крепнет уверенность, что поливать водой прямо из колодца стоит лишь в крайнем случае, растения очень угнетаются. В прошлый раз поливали тёплой водой, всё сразу пошло в рост. Хорошо растёт порей, и даже тыквы/кабачки, которые явно обещали загнуться, тоже растут.</p>
+
+<p>Клубнику кто-то портит, возможно, это птицы. Я тут в инете нашёл способ устраивать вертикальные грядки из труб, как мне представляется, это хороший способ, помимо экономии места:</p>
+
+<p><img class="right half" src="/images/2015/9d2a44.jpg" width="400"></p>
+
+<ul>
+<li>к ягодам не доберутся слизни и птицы</li>
+<li>клубника не затеняется сорняками</li>
+<li>легче поливать, если всё сделать аккуратно и грамотно</li>
+<li>ягоды не лежат на земле</li>
+</ul>
+
+
+<p>Потом я стал копать яму под <del>вишню</del>сливу на месте, где раньше лежал торф. Копать очень тяжело, в этом месте очень плотная влажная глина, и <strong>очень</strong> много камней, не помню, чтобы я где&ndash;то встречал столько камней сразу + ещё две бутылки и два куска проволоки. От земли воняет какой-то тухлятиной, похоже, в этом месте было болотце.</p>
+
+<p>Потом надо было ещё наполнить ёмкости под следующий полив, с огромным трудом вытащил 11 вёдер. Тащил прямо из последних сил. Не знаю, как я раньше вытаскивал по 20-30 вёдер. Комары нас просто сожрали, возле колодца какой-то рассадник комаров. Обратно доехали хорошо, но я так устал, что еле доехал.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/22/kak-ia-proviol-dvadtsat'-vtoroie-iiunia/">Как я провёл двадцать второе июня</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-22T23:23:45+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>После работы заехал в МФЦ поменять паспорт, потому что Юля простирнула мне паспорт вместе с рубашкой, и вообще его надо было заменить. МФЦ - место высокой культуры обслуживания. На стоянке свободно, наверх можно подняться на лифте, народу никого, наверху тётенька сразу спрашивает, по какому вопросу я пришёл, никакой очереди, в окошке занимаются лично мной, я сижу в удобном кресле. Одни сплошные плюсы. Раньше все эти паспортные столы находились в неприспособленных помещениях без мебели, там всегда была толпа народу, куча очередей к запертым дверям, спросить не у кого, на стенах налеплены ободранные бумажки, из которых надо что-то понять, а документы приходится заполнять на коленке принесённой с собой ручкой. МФЦ - огромный шаг вперёд в области обслуживания населения.</p>
+
+<p>Приехала Маша (няня), привезла молдавской черешни.</p>
+
+<p>Вечером собрали триммер, тщательно всё обдумав, я поставил не леску, а нож. Косить довольно неудобно, высокая тонкая трава не срезается, а валится и пытается намотаться на нож. Таким тримером, наверное, хорошо косить джунгли из толстых сорняков, какие росли у нас на участке. Кое-как покосили перед домом, надо было бы ещё покосить вдоль забора, где столб. Там как раз и есть джугли из полыни, чертополоха, вьюнка и прочего.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/21/kak-ia-proviol-dvadtsat-pervoie-iiunia/">Как я провёл двадцать первое июня</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-21T20:55:18+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>В двенадцать часов поехали к бабушке на кладбище. Доехали хорошо, но встали далековато. По-видимому, на Преображенском рынке как раз самый пик посещаемости, потому что в понедельник там санитарный день. На могиле всё очень заросло, судя по всему, с осени туда никто не приезжал. Юля выдернула все сорняки и посадила три коробочки бархатцев.</p>
+
+<p>На Преображенском Валу почему-то очень много трамваев, угловатые Усть-Катавского завода и новые сине-оранжевые, а также такие же, но в красно-белой расцветке. На Игорька трамваи произвели впечатление, похоже, что раньше он их не видел. В электричках он бывал, в маршрутках ездил, в метро вроде бы тоже как-то раз был, а вот трамваев не видел. Разительная разница, да. Я вот, к примеру, практически вырос в метро.</p>
+
+<p>После кладбища пошли на рынок купить чтонть домой. Почти у вхда продавалась клубника по 150 рублей за килограмм. Юля сказала, что дальше дешевле не будет и мы купили 10 кг. На двадцать шагов дальше она продавалась по 130, но чуть похуже, и мы взяли ещё пять килограммов. И ещё пять килограммов для Лены Куркиной. Потом ещё взяли два кило черешни по 200 рублей. Ещё купили слив по 50 рублей, помидоров розовых, но мелких по 120, картошку молодую по 50. Я ещё взял банку шампиньонов целых 850 граммов за 80 руб., а Юля купила камбалу. Теперь мы будем есть камбалу. На Ленте была <a href="http://moslenta.ru/article/2015/05/30/povar/">интересная статейка</a>, интервью с шеф-поваром, по его мнению, сейчас вернулась мода на русскую и советскую кухню, например, подают перловку с грибами. Всё же нужна машина побольше, в эту тяжело всё погрузить.</p>
+
+<p>Дома мы очень долго чистили клубнику, потом небольшую часть пустили на варенье, остальное давили и резали с сахаром и упаковывал во что есть, потому что вдруг выяснилось, что у нас нет ни чистых пакетов, ни контейнеров, ни вообще ничего. Разложили во всякие поюзанные коробочки, пакет из-под печенья и обрезанные бутылки. Клубникой запаслись, теперь ещё надо запастись смородиной, калиной и облепихой. И ещё малиной и абрикосами. И крыжовником.</p>
+
+<p>Я съездил в гараж за триммером, заодно заехал в Дикси. Там сейчас появилось молоко в мягких пакетах, честно написано, что всего 800 мл, зато стоит 29 рублей. Расплачиваюсь я сейчас только карточкой Тинькофф, чтобы получать кэшбэк. Заодно забыл купить пакеты под клубнику.</p>
+
+<p>Вечером вышел во двор прогрел Виктору Ивановичу машину, чтобы зарядился аккумулятор. 30 минут ровно по часам.</p>
+
+<p>Начали цвести розы, в частности, за домом. На желтой розе Persian Yellow много цветов, то есть она нормально оправилась после болезни, и, самая главная новость, расцвела одна из роз, которые мы некогда купили в ОБИ и в прошлом году высадили (которым я бурил лунки мотобуром). По-видимому, нам её продали, как Yellow Summer, но это сорт флорибунда, а наша выглядит, как чайно-гибридная. На ней очень крупный бледно-желтый цветок, см. фотоархив. Ещё цветёт одна из белых, я что-то уже затрудняюсь сказать, как она может называться, ни одно описание не подходит. Роза с торца дома цветёт, большая роза у подъезда собирается распускаться. Цветёт чубушник на центрально газоне. Когда ехали к Лене отдать ей клубнику, у самого последнего таунхауса возле Магнолии растут плетистые розы, целый забор из роз. Эти люди просто утёрли нам нос и все наши потуги на цветоводство выглядят жалкими и никчёмными. Теперь мы должны под покровом ночи прокрасться к их дому, подползти к кусту и нарезать с него черенков.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/20/kak-ia-proviol-dvadtsatoie-iiunia/">Как я провёл двадцатое июня</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-20T20:51:36+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Проспал до девяти часов, только сейчас отоспался после Воронежа. Собрались и поехали на участок, конечно же, по новой дороге, пока бесплатно. Надо отметить, что в направлении из Москвы перед Шереметьево строится только три пропускных пункта, остальные даже не начаты.</p>
+
+<p>Доехали хорошо, заехали на рынок купили доски и краску, Юля ещё купила новую тяпку. Продавец досок меня уже узнаёт и здоровается при встрече. Нам ещё предлагали бензиновый триммер подержанный за четыре тысячи.</p>
+
+<p>На участке всё в порядке, всё понемного растёт, земля ещё влажная от прошлого полива, яркого солнца с тех пор не было. Игорёк съел две первые ягоды клубники, см. фотоархив. Юля полила кое-что удобрением, что мы замочили в тот раз, наверняка будет потрясающий результат, да. Набрали ещё немного редиски и зелёного лука.</p>
+
+<p>Я взялся за доски и с некоторым усилием сколотил высокую грядку для винограда. Получилось довольно неаккуратно, но если не придираться, то сойдёт. Литр краски сразу кончился, я что-то не рассчитал. С другой стороны, надо было заранее купить краску в Леруа Мерлен, там сильно дешевле.</p>
+
+<p>Грядку с трудами установили на место, я начал её наполнять. Мимо опять проезжал рабочий на велосипеде, мы его наняли косить сорняки. Он сперва притащил косу и начал косить косой. Подозреваю, что наши джунгли коса не берёт, потому что он опять куда-то убежал и притащил триммер Хускварна. По его словам, триммер от работы всё время перегревается, и пока триммер остывал, рабочий косил серпом! Серпом, Карл! Я вообще первый раз вижу настоящий серп, раньше мне он встречался только в паре с молотом.</p>
+
+<p>Не знаю, сколько времени я потратил,но грядку я наполнил. В середину я ещё накидал крапивы и один мешок куриного перегноя. Воняло от него ололо, сплошной аммиак, аж глаза режет. Я даже не знаю, можно ли такую отраву класть под растения. Да, я ещё специально начал разбирать кучу, которая занимает место под предполагаемую вишню. Юля села окучивать порей с помощью воронежского чернозёма.</p>
+
+<p>Рабочий всё скосил, участок сразу выглядеть куда аккуратнее. Надо было его ещё привлечь к перевозке земли, но я что-то не сообразил. Юля ему заплатила 1000 рублей. Я ещё высыпал несколько тачек под туи, выровнял и заполнил рамки под розой и под гортензией. Розы вроде бы живы, есть набухшие почки, если всё пойдёт нормально, то будут новые побеги. Рабочий сказал, что он из города Пролетарск в Таджикистане, но по национальности узбек. Я сейчас посмотрел в Википедии, в Пролетарске 95% населения узбеки. Ещё он сказал, что у них кто побогаче, строят дома из кирпича, а все остальные строят &ldquo;из земли&rdquo;, то есть, видимо, из глины.</p>
+
+<p>Когда собирались уезжать, вроде как начинался дождь. Начался он, когда мы выехали на новую трассу и шёл до вечера.  Это очень хорошо, я очень рад, что не надо таскать воду ведром, и что она сама падает с неба. Теперь всё как следует польётся. Малыш на участке очень капризничал, в машине сразу уснул.</p>
+
+<p>В начале одиннадцатого я вдруг почувствовал прилив сил и поехал на вечерний шопинг в Леруа Мерлен. Купил краски, две бутыли удобрения &ldquo;Биомастер&rdquo;, морилку и аккумуляторы АА для Юли. Всего потратил 706 рублей, а также отлично поразвлёкся.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/18/kak-ia-proviol-vosiemnadtsatoie-iiunia/">Как я провёл восемнадцатое июня</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-18T23:37:43+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>После работы поспешили на участок, посмотреть, как там всё засохло, пока мы отдыхали в Воронеже. Первый раз проехали по новой дороге, спуск в новой дороги на бетонку открыт пока что временный, минуя будущие пункты оплаты.</p>
+
+<p>К удивлению, ничего не засохло, земля под декоративным виноградом и розами была ещё даже влажной. Порей выглядел лучше, чем раньше, что-то у меня закрадывается мысль, что полив ледяной водой из колодца особой пользы ему не приносит.</p>
+
+<p>Вытащил из колодца 22 ведра. Не первый раз уже замечаю, что после двадцатого ведра почему-то вёдра вытаскиваются неполные. Как бы не оказалось, что там в колодце воды всего на высоту ведра.</p>
+
+<p>Юля посадила куст форзиции за яблонями на границе участка.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/17/kak-ia-proviol-siemnadtsatoie-iiunia/">Как я провёл семнадцатое июня</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-17T14:12:17+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>В одиннадцать часов пошёл на мастер-класс в &ldquo;Юнилевер&rdquo;, Юля попросила для отчётности. В прошлый раз он занял три часа, покормили скромно, зато подарили банку соуса деми-глас. В этот раз всё было устроено совсем по-другому. Тема мастер-класса была &ldquo;Азиатская кухня&rdquo;. Сначала некий повар Гена рассказал, как он ездил в Шанхай и Гонконг, представил новые соусы в линейке, а потом все встали к маленьким передвижным кухонькам, примерно по три человека к каждой + плюс один повар от Юнилевера. Я попал в компанию к шеф-повару из &ldquo;Сити-Кафе&rdquo; на улице Горбунова и ещё какому-то челу, который сказал, что не умеет готовить. Ещё к каждой кухоньке был приставлен повар от Юнилевера. Нам досталась толстая тётенька Нистратова Оксана.</p>
+
+<p><img class="right half" src="/images/2015/IMG_20150617_115308.jpg" width="400">Все продукты уже были нарезаны и взвешены, надо было только кидать их в вок согласно технологической карте и яростно помешивать, чтобы не пригорело.</p>
+
+<p>Сначала тот чел, что не умеет готовить, готовил лапшу с курицей и соусом из чёрного перца. На мой взгляд, он управлялся довольно неловко, но всё получилось. Все поели лапши на троих и настала моя очередь готовить, а тот чел переметнулся в группу к повару Гене. Я приготовил, точнее, непрерывно помешивал, курицу на воке, затем я помешивал чеснок с имбирём, яйцо, рис, зелёный лук, затем всё это вместе с курицей, потом я мастерски высыпал всё это на тарелку. Очень вкусно, стоило бы купить соус &ldquo;Кнорр&rdquo; из чёрного перца и приготовить такую же штуку себе дома.</p>
+
+<p><img class="left half" src="/images/2015/IMG_20150617_115845.jpg" width="400">Самое странное, что большинство присутствующих свои приготовленные блюда пробовали и дальше не ели, просто отставляли в сторону, или уносили в мусор. Я всё съел подчистую. Кажется, я на этом спалился.</p>
+
+<p>Потом ещё я готовил типа суп, на самом деле просто вскипятил бульон Кнорр и залил им нарезанные овощи, на самом деле полная хрень, но тоже можно поесть.</p>
+
+<p>На этом мероприятие закончилось, примерно в  12-45. Потом ещё пришлось ответить на вопросы, из какого заведения я пришёл. Как мне показалось, менеджер заподозрил во мне самозванца. С собой я унёс технологические карты и пару каталогов.</p>
+
+<p>Вечером Юля принесла 4 кг мяса, тонкий край. Часть поджарили в аэрогриле. По небу ходили тучи, но дождь так и не начался.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/16/kak-ia-proviol-shiestnadtsatoie-iiunia/">Как я провёл шестнадцатое июня</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-16T22:03:54+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>С утра хотел одеть новые кроссовки, потому что мои замечательные тапочки SETO порвались сбоку, но потом почему-то передумал, и оченьт удачно, потому что, выйдя утром из метро, попал под дождь, промок, и пару раз наступил в лужу. К счастью, всегда ношу с собой запасные носки. Первый дождь с 5 июня.</p>
+
+<p>После работы с Юлей заехали в салон КМ/Ч на МКАДе. В отделении Шевроле всё очень уныло,стоит Шевроле Круз хэтчбек, Авео и две Шевроле-Нивы. Круз в единственном экземпляре, можно купить за 770 тысяч. В левом от входа конце стоят китайские машинки, вроде &ldquo;Лифан&rdquo;. Отделение &ldquo;Опель&rdquo; вообще закрыто.</p>
+
+<p>Потом ещё Юля позвонила в &ldquo;У-Сервис&rdquo;, якобы у них акция &ldquo;Опель прощается с Россией&rdquo;, на самом деле цены не изменились по сравнению с апрелем. Зафира предыдущая на механике стоит 770 тысяч, Зафира Турер - миллион, Антара - миллион триста.</p>
+
+<p>Я бы согласился на Зафиру с механикой, но сначала надо залить фундамент. Начнём, как я думаю, в сентябре.</p>
+
+<p><img src="/images/2015/IMG_20150616_184649-PANO.jpg"></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/14/kak-my-iezdili-v-voroniezh/">Как мы ездили в Воронеж</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-14T23:59:59+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Юля проснулась в восемь часов, а я проспал до половины десятого. Юля жаловалась, что ей было скучно, мне её сетования непонятны. В таком хорошем доме скучать нельзя - ведь тем есть даже бассейн и можно загорать.</p>
+
+<p>После завтрака мы с Максимом поехали в магазин инструментов. В Воронеже есть крупная фирма &ldquo;Энкор&rdquo;, которая занимается инструментом и стройматериалами, и я себе купил <em>стусло</em>, т.е. ножовку, встроенную в направляющие. С её помощью я планирую непременно починить дверь в туалет и ещё сделать кучу разных полезных вещей.</p>
+
+<p>Я вообще планировал поехать на стрельбище, но Максим предложил сделать полезное дело - помыть машину. Я тщательно всё обдумал и решил, что чем пускать деньги и время на ветер, лучше действительно помыть и, самое главное, вычистить изнутри машину. Что-то она у нас уже заросла грязью, крошками и мусором. Так что я пригнал свою машину и тоже стал её мыть. Очень кстати у Максима имеется мини-мойка Керхер и пылесос. С некоторым трудом машину я отмыл. Остались тополиные почки на капоте и небольшое пятно от скотча возле заднего бампера. Внутри я тоже всё протёр, выбросил 100500  конфетных фантиков и пакетиков от сока, всосал пылесосом все крошки от печенья и помыл коврики.</p>
+
+<p>Около семи собрались, погрузились и отправились, с собой взяли Ваню. Выехали из Воронежа благополучно. Вроде как сейчас самые длинные дни и я планировал, что до полуночи будет более или менее светло. Однако уже в десять было абсолютно темно, как будто все намазали гуталином. Дети часа через полтора-два уснули. На пунктах оплаты машин было немного, но даже если потерять семь раз всего по пять минут, то выходит уже всё равно серьёзная задержка.Километров за семь до Москвы попали в пробку перед МКАДом, потому что все лошки возвращались с дач. И потом ещё Юля завела нас в пробку перед Молодогвардейской улицей, там опять оживились работы. Домой приехали без пятнадцати три. Я устал гораздо больше, чем при дороге &ldquo;туда&rdquo;. Когда мы приехали, уже отчётливо начинало светать. Последний перевод часов - полнейшая глупость. Кому нужен рассвет в три утра? Вот в десять вечера свет ещё как раз очень нужен. Утром проспал до восьми, на работу пошёл к десяти часам, тренировку пропустил.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/13/kak-my-iezdili-v-voroniezh/">Как мы ездили в Воронеж</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-13T23:59:59+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Утром проспали до десяти часов, в половине одиннадцатого приехал Максим и нас повезли завтракать. Я бы не отказался, если бы завтрак нам привезли прямо в дом, чтобы можно было бы позавтракать у бассейна.</p>
+
+<p>Я вообще планировал, что мы поедем на стрельбище, но Максим предложил поехать покататься на квадроциклах, которых у него как раз два. Напомню, что на квадроцикле я катался два раза в Тунисе, в 2006 году.</p>
+
+<p>Конечно, к этой штуке надо привыкнуть. Мне Максим доверил квадрик Хонда, очень мощный, по всей видимости. Мне всё время казалось, что эта штука сейчас опрокинется. Когда мы съезжали с асфальта на бездорожье, мне встретилась какая-то тётенька, которая ехали на кладбище и просила подвезти ей две бутыли с водой. Я заодно подвёз и саму тётеньку тоже, метров на двести или триста.</p>
+
+<p>Максим поехал вместе с Ваней, Ваня сидел сзади. Я был уверен, что Максим иногда даёт ему покататься за рулём, оказалось, что нет.</p>
+
+<p>В целом я с маршрутом справился, хотя всё время отставал. Сначала мы ехали по какой-то дороге, очень разбитой, в некоторых местах по ней было бы тяжело пробраться даже пешком. Самое странное, что какой-то чудила ехал за нами на машине. Потом мы выехали к реке, если я прально понял, это был Голубой Дунай. Максим предлагал переехать небольшой заливчик, но потом передумал. Потом мы вернулись к посёлку, съехали в лес вдоль железной дороги. Там я уже натерпелся страху, потому что надо было спускаться с крутых склонов по узкой тропинке и точно выруливать между деревьев. На самом деле, если привыкнуть, то это несложно. Что любопытно - лес там совершенно такой же, как и у нас, но в виде подлеска повсюду растёт акация. На обратном пути я даже смог переехать через рельсы.</p>
+
+<p>Непременно потом куплю квадроцикл для Игорька. Как я считаю теперь, не может быть счастливого детства, если нет квадроцикла.</p>
+
+<p>Вечером поехали в гости к Татьяне Ивановне. Как обычно, для нас накрыли великолепный стол, конечно же, были манты. К счастью, у меня хватило воли и сообразительности не наедаться заранее. Максим пожарил мясо на решетке, очень вкусно, Анатолий Николаевич отказался, потому что оно с кровью. Там уже растут кабачки и помидоры, на грушах висят маленькие груши. Вишня в этом году по неизвестной причине не завязалась. Посажен виноград, на зиму его надо укрывать, как и у нас. Шоссе в ту сторону отличное, дорога в посёлке относительно разбитая, подъезд от посёлка к дому ужасно разбит, легковая машина туда, думаю, уже не пролезет, хотя в какой-то из визитов я туда заезжал, не помню, на какой именно машине.</p>
+
+<p>Вернулись в дом, когда было уже темно.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/91">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/89">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/12/15/kak-ia-proviol-15-diekabria-2017/">Как я провёл 15 декабря, Пт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/14/kak-ia-proviol-14-diekabria-2017/">Как я провёл 14 декабря, Чт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/13/kak-ia-proviol-13-diekabria-2017/">Как я провёл 13 декабря, Ср</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/12/kak-ia-proviol-12-diekabria-2017/">Как я провёл 12 декабря, Вт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/11/kak-ia-proviol-11-diekabria-2017/">Как я провёл 11 декабря, Пн</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/10/kak-ia-proviol-10-diekabria-2017/">Как я провёл 10 декабря, Вс</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/09/kak-ia-proviol-9-diekabria-2017/">Как я провёл 9 декабря, Сб</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/08/kak-ia-proviol-8-diekabria-2017/">Как я провёл 8 декабря, Пт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/07/kak-ia-proviol-7-diekabria-2017/">Как я провёл 7 декабря, Чт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/06/kak-ia-proviol-6-diekabria-2017/">Как я провёл 6 декабря, Ср</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/05/kak-ia-proviol-5-diekabria-2017/">Как я провёл 5 декабря, Вт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/04/kak-ia-proviol-4-diekabria-2017/">Как я провёл 4 декабря, Пн</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/03/kak-ia-proviol-3-diekabria-2017/">Как я провёл 3 декабря, Вс</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/02/kak-ia-proviol-2-diekabria-2017/">Как я провёл 2 декабря, Сб</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/01/kak-ia-proviol-1-diekabria-2017/">Как я провёл 1 декабря, Пт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/30/kak-ia-proviol-30-noiabria-2017/">Как я провёл 30 ноября, Чт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/29/kak-ia-proviol-29-noiabria-2017/">Как я провёл 29 ноября, Ср</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/28/kak-ia-proviol-28-noiabria-2017/">Как я провёл 28 ноября, Вт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/27/kak-ia-proviol-27-noiabria-2017/">Как я провёл 27 ноября, Пн</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/26/kak-ia-proviol-26-noiabria-2017/">Как я провёл 26 ноября, Вс</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/25/kak-ia-proviol-25-noiabria-2017/">Как я провёл 25 ноября, Сб</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/24/kak-ia-proviol-24-noiabria-2017/">Как я провёл 24 ноября, Пт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/23/kak-ia-proviol-23-noiabria-2017/">Как я провёл 23 ноября, Чт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/22/kak-ia-proviol-22-noiabria-2017/">Как я провёл 22 ноября, Ср</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/21/kak-ia-proviol-21-noiabria-2017/">Как я провёл 21 ноября, Вт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/20/kak-ia-proviol-20-noiabria-2017/">Как я провёл 20 ноября, Пн</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/19/kak-ia-proviol-19-noiabria-2017/">Как я провёл 19 ноября, Вс</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/18/kak-ia-proviol-18-noiabria-2017/">Как я провёл 18 ноября, Сб</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/17/kak-ia-proviol-17-noiabria-2017/">Как я провёл 17 ноября, Пт</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/11/16/kak-ia-proviol-16-noiabria-2017/">Как я провёл 16 ноября, Чт</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2017 - maximkoo -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a>. Background image by <a href="http://www.flickr.com/photos/89433098@N04/">Florian Kraft Fotografie</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
