@@ -199,7 +199,7 @@ task :today, :param do |t, args|
 	ddd=getShortWeekDay(cDate.strftime("%A")) 
 
 	filename=source_dir+'/'+posts_dir+'/'+cDate.strftime('%Y-%m-%d')+'-kak-ia-proviol-'+cDate.strftime('%d').to_i.to_s+'-'+s+'-'+cDate.strftime('%Y')+'.'+"#{new_post_ext}";
-	title='Как я провёл '+cDate.strftime('%d').to_i.to_s+' '+sr+', '+ddd;
+	title='Как я провёл '+cDate.strftime('%d').to_i.to_s+' '+sr+' '+cDate.strftime('%Y')+' года, '+ddd;
   if File.exist?(filename)
     abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
   end
