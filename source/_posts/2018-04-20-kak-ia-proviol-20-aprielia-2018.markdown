@@ -15,7 +15,7 @@ categories:
 
 {% img center /images/2018/IMG_20180420_091319_800.jpg %}
 
-На работе отказался от кофе вообще, раз меня от него так таращит. Сегодня день донора, я поискал в инете и без труда нашел фоточки, которые в понедельник делали те засранцы-блоггеры.
+На работе отказался от кофе вообще, раз меня от него так таращит. Сегодня день донора, я поискал в инете и без труда нашел [фоточки, которые в понедельник делали те засранцы-блоггеры](http://visualrian.ru/search/?query=%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D0%B9+%D0%91%D0%B8%D1%8F%D1%82%D0%BE%D0%B2&area=author&advanced=on&categories%5B%5D=health&country_id=&event_from=&created_from=&region_id=&event_to=&created_to=&city_id=&orientation=all&order=desc#main).
 
 {% img center /images/2018/000108601257_RIAN-ID-5476682.jpg %}
 
