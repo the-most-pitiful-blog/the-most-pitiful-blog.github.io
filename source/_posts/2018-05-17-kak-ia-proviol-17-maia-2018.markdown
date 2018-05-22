@@ -33,9 +33,9 @@ categories:
 
 В инете я нашел [планы застройки территории Бадаевского завода](https://stroi.mos.ru/articles/kontsieptsiia-razvitiia-badaievskogho-pivovariennogho-zavoda). В будущем он будет выглядеть вот так:
 
-{% img center /images/2018/IMG_20180517_164559_800.jpg %}
+{% img center /images/2018/63374be3a3295b20448e8622b70d58a88422b193_800.jpg %}
 
-{% img center /images/2018/IMG_20180517_164613_800.jpg %}
+{% img center /images/2018/61cef5b097423b1a4378dd0c88a40cbdb4e754a9_800.jpg %}
 
 а пока что выглядит так:
 
