@@ -1,0 +1,7 @@
+---
+layout: post
+title: "Как я провёл 30 мая 2018 года, Ср"
+date: 2018-05-30 09:31:01 +0300
+comments: true
+categories: 
+---
